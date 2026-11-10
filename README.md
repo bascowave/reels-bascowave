@@ -24,12 +24,13 @@ assunto/link ─► 1. pesquisa na fonte ─► 2. roteiro ─► 3. cards parad
 Tudo isso está empacotado na skill **`reel-bascowave`** (`.claude/skills/reel-bascowave/`). Você não precisa
 decorar comandos: abra o Claude Code nesta pasta e peça em português.
 
-### Os dois formatos
+### Os três formatos
 
 | Formato | Estrutura | Texto na tela |
 |---|---|---|
 | **7 pontos** | gancho → "são 7" → 01…07 → pergunta → resumo | frase inteira no topo, palavras acendendo; contador 01/07 |
 | **3 ferramentas** | gancho → contagem 3-2-1 → (destrava 01 → demo) ×3 → resumo | uma palavra por vez embaixo; cartões que destravam; "DESBLOQUEADO 1/3" |
+| **Editorial claro** | gancho → "4 truques" → (capítulo "truque n de 4" → explicação) ×4 → dica → resumo | fundo de papel, linha em serifa itálica + palavra-chave com marca-texto azul |
 
 Alterne entre eles para o perfil não ficar repetitivo.
 

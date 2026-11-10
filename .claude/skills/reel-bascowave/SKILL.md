@@ -32,6 +32,13 @@ O usuário não grava vídeo. Ele passa o assunto; eu entrego o Reel pronto. Fal
 |---|---|---|---|
 | **7 pontos** | `$K/modelo/` | 11 cenas: gancho → "são 7" → 01…07 → pergunta → resumo | frase inteira no topo, palavras acendendo; contador NN/07 |
 | **3 ferramentas** | `$K/modelo-ferramentas/` | 9 cenas: gancho → contagem 3-2-1 → (destrava 01 → demo) ×3 → resumo | **uma palavra por vez** embaixo da janela; título grande só nos momentos-chave; pílula "DESBLOQUEADO n/3" |
+| **Editorial claro** | `$K/modelo-editorial/` | ~12 cenas: gancho → "4 truques" → (capítulo "truque n de 4" → explicação) ×4 → dica → resumo | fundo de papel com sombra de onda; linha em serifa itálica + palavra-chave grande com marca-texto azul; cartões brancos com faixa preta; sem legenda palavra a palavra |
+
+No modelo **Editorial claro**:
+- Cada cena: `.kick.serif` (linha pequena, `data-at`) + `.key` com `<span>PALAVRA</span>` (`data-at` aparece, `data-hl` passa o marca-texto). Capítulo: `.cap-n` (número) + `.cap-t` com `<span class="mark">`.
+- Cartões: `.card` com `.head` (faixa preta) e `.body`; `.tag` = etiqueta azul; `data-strike` risca texto; `data-mark` marca em azul num tempo.
+- `data-cap` fica escondido: só dá o tempo da fala. Som: marque `data-sfx="appear|reveal|success"` antes do `data-at` no elemento.
+- Fundo claro esconde movimento: cada cena precisa de algo entrando no 1º segundo, senão o ritmo reprova.
 
 Pergunte qual formato (ou escolha o que não foi usado no último Reel e diga por quê). No modelo **3 ferramentas**:
 - Cenas vão no lugar de `<!--CENAS-->`; tema do rodapé no texto `TEMA`; `data-steps="3"` na raiz.
