@@ -57,15 +57,19 @@ Pergunte qual formato (ou escolha o que não foi usado no último Reel e diga po
    - Peças: `.pop` com `data-at` (segundos após o início da cena), `.panel`, `.chip`, `.stamp` (círculo), `.code`; `data-type`+`data-rate` digita texto; `data-grow`/`data-to`/`data-to2`/`data-at2` anima barra; `data-fade` faz aparecer. Ilustração entre y 640 e 1300; nada abaixo de 1300 (HUD) nem acima de 140.
    - Rodapé: logo + `@bascowave` à esquerda, tema à direita (trocar o texto `HOOKS`).
    - Tempos provisórios: 3,8 s por cena. A narração reparte depois.
-4. **Cards para aprovação.** `bash ~/.claude/skills/claude-video/scripts/frames.sh reels/<nome>/proj <t1,…,t11>` (≈0,4 s antes do fim de cada cena), juntar numa faixa e mostrar. Esperar o "sim".
-5. **Narração** (só depois do sim; dizer o total de caracteres antes):
-   - `reels/<nome>/voz/falas.txt`, uma fala por cena, na mesma ordem.
+4. **Falas.** Escrever `reels/<nome>/voz/falas.txt`, uma fala por cena, na mesma ordem (regras de pronúncia no passo 6).
+5. **Storyboard em HTML: SEMPRE, antes de narrar** (o usuário pediu; evita descobrir problema de som/texto só no vídeo final).
+   - `python -X utf8 $K/scripts/storyboard.py reels/<nome>` gera `reels/<nome>/storyboard/storyboard.html`: por cena, a **imagem de como fica**, o tempo, o **texto na tela**, a **fala** e os **efeitos sonoros** (qual som e em que segundo), mais o total de caracteres.
+   - Abrir no painel do navegador (`preview_start` "reel-preview" → `http://localhost:8791/<nome>/storyboard/storyboard.html`) e enviar ao usuário (SendUserFile).
+   - Antes de mostrar, ler o storyboard e corrigir o óbvio (som duplicado, cena sem efeito nenhum, texto cortado).
+   - Perguntar: "O storyboard está certo? A narração vai gastar N caracteres." Esperar o "sim". Mudou algo? Gerar de novo e mostrar de novo.
+6. **Narração** (só depois do sim ao storyboard):
    - Fala = frase da tela dita de forma natural; termos técnicos em inglês ficam só na tela quando der ("arquivo de configurações" em vez de "settings.json").
    - Pronúncia: "Claude" escrito normal (o usuário aprovou). Nunca começar frase com "E" solto (sai "É"). Nada de fala de 2 palavras terminando em palavra inglesa ("Vira hook" saiu com sotaque inglês) — dar contexto: "Então transforma isso num hook." Evitar "seguem".
    - `cd "D:/Editor de Vídeo com IA" && STABILITY=0.7 npm run narrar -- reels/<nome>/voz/falas.txt reels/<nome>/voz-el Qrdut83w0Cr152Yb4Xn3` (voz Paulo, brasileira; stability 0.7 aprovado).
-6. **Montar:** `bash $K/scripts/montar.sh reels/<nome> <nome>-bascowave`. Ele sincroniza as palavras pelo tempo real da fala, renderiza, põe os efeitos, mixa (voz na frente, −16 LUFS, pico < −4 dBFS) e gera `out/quadros-2s.jpg`.
-7. **Conferir antes de entregar:** ler `out/quadros-2s.jpg` (nada cortado, legível, dentro da área segura, contador certo), ritmo PASSOU, volume na meta. Corrigir e montar de novo se falhar.
-8. **Entregar:** enviar o MP4, dizer duração, volume, checagens, caracteres gastos e as palavras de risco para ouvir. Pedir pontos de melhoria e anotar na memória.
+7. **Montar:** `bash $K/scripts/montar.sh reels/<nome> <nome>-bascowave`. Ele sincroniza as palavras pelo tempo real da fala, renderiza, põe os efeitos, mixa (voz na frente, −16 LUFS, pico < −4 dBFS) e gera `out/quadros-2s.jpg`.
+8. **Conferir antes de entregar:** ler `out/quadros-2s.jpg` (nada cortado, legível, dentro da área segura, contador certo), ritmo PASSOU, volume na meta. Corrigir e montar de novo se falhar.
+9. **Entregar:** enviar o MP4, dizer duração, volume, checagens, caracteres gastos e as palavras de risco para ouvir. Pedir pontos de melhoria e anotar na memória.
 
 ## Sons do Reel (kit próprio a cada vídeo)
 `montar.sh` chama `scripts/kit_som.py`, que monta `som/kit/` antes dos efeitos:

@@ -19,6 +19,9 @@ for m in cenas:
             cues.append({"t": round(at, 3), "type": "appear", "desc": "destaque " + tk.strip('*!?.,')})
     for pm in re.finditer(r'class="pop ([^"]*)"[^>]*data-at="([\d.]+)"', body):
         if 'stamp' in pm[1]: cues.append({"t": round(s + float(pm[2]), 3), "type": "reveal", "desc": "selo"})
+    # formato Editorial: pop quando o marca-texto passa na palavra-chave (.key data-hl)
+    for km in re.finditer(r'<div class="key"[^>]*?data-hl="([\d.]+)"', body):
+        cues.append({"t": round(s + float(km[1]), 3), "type": "appear", "desc": "marca-texto"})
     for tm in re.finditer(r'data-type="([\d.]+)"', body):
         cues.append({"t": round(s + float(tm[1]), 3), "type": "typing", "dur": 1.3, "desc": "digitação"})
     for sm in re.finditer(r'data-sfx="(\w+)"[^>]*data-at="([\d.]+)"|data-at="([\d.]+)"[^>]*data-sfx="(\w+)"', body):

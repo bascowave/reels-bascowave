@@ -2,14 +2,14 @@
 
 O usuário não grava vídeo: ele passa um assunto (ou link) e eu entrego o Reel pronto em motion graphics.
 Para isso use a skill **`reel-bascowave`** (`.claude/skills/reel-bascowave/SKILL.md`): roteiro, cards, narração
-ElevenLabs (voz Paulo, stability 0.7), efeitos, render e conferência. Ela tem dois formatos para alternar:
-"7 pontos" e "3 ferramentas".
+ElevenLabs (voz Paulo, stability 0.7), efeitos, render e conferência. Ela tem três formatos para alternar:
+"7 pontos", "3 ferramentas" e "Editorial claro".
 
 ## Regras que não se negociam
 - Identidade @bascowave (logo onda azul em `marca/`), nunca a do criador de referência (@gustagoat.ai).
 - Créditos do ElevenLabs são pagos: dizer quantos caracteres vai gastar e esperar o "sim" antes de narrar ou regerar.
 - Conteúdo conferido na fonte; não inventar recurso, comando ou número.
-- Cards aprovados antes de narrar; vídeo conferido (quadros a cada 2 s, ritmo, volume) antes de entregar.
+- Storyboard em HTML (imagem, texto, fala e efeitos de cada cena) aprovado antes de narrar; vídeo conferido (quadros a cada 2 s, ritmo, volume) antes de entregar.
 
 ## Onde salvar (não criar pastas fora disso)
 | O quê | Onde |
