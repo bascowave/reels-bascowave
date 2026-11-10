@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;800&family=JetBrains+Mono:wght@500;700&display=swap" />
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<script src="studio.js"></script>
+<style>
+  /* Formato "3 ferramentas" @bascowave: janelas de app em tela cheia, legenda de UMA palavra por vez,
+     contagem 3-2-1-0, cartões que destravam enchendo de água, onda varrendo a tela na troca de cena. */
+  :root { --bg0:#012B4A; --bg1:#014676; --on:#FFFFFF; --off:#2A6E9E; --lime:#34B5DF; --pink:#2B99D1;
+          --panel:#01375E; --line:#1B5E8E; --dark:#012B4A; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { width:1080px; height:1920px; overflow:hidden; background:var(--bg0); }
+  #root { position:relative; width:1080px; height:1920px; overflow:hidden;
+    background: radial-gradient(ellipse 80% 45% at 50% 45%, var(--bg1) 0%, var(--bg0) 78%);
+    font-family:'Sora', sans-serif; font-weight:800; color:var(--on); }
+  .abs { position:absolute; }
+  .mono { font-family:'JetBrains Mono', monospace; }
+  #waves { position:absolute; left:0; top:1700px; width:1080px; height:220px; overflow:hidden; }
+  #waves svg { position:absolute; left:0; width:2160px; }
+  #sweep { position:absolute; top:0; left:0; width:1500px; height:1920px; z-index:50; pointer-events:none; }
+  .scene { position:absolute; inset:0; opacity:0; }
+  /* legenda de uma palavra: só a palavra falada agora aparece */
+  .cap { position:absolute; left:60px; right:60px; top:1255px; height:110px; text-align:center; font-size:68px; }
+  .w { position:absolute; left:0; right:0; color:var(--on); opacity:0; letter-spacing:-.02em; }
+  .w.lime { color:var(--lime); }
+  .w.pink { color:var(--on); }
+  .w .bx { display:none; }
+  .title { position:absolute; left:60px; right:60px; top:170px; text-align:center; font-size:92px; line-height:1.02; letter-spacing:-.03em; opacity:0; }
+  .title b { color:var(--lime); font-weight:800; }
+  .ill { position:absolute; left:0; right:0; top:440px; height:780px; }
+  .pop { position:absolute; opacity:0; }
+  .panel { background:var(--panel); border:2px solid var(--line); border-radius:28px; }
+  .win { background:#01243F; border:2px solid var(--line); border-radius:24px; overflow:hidden; }
+  .win .bar { height:56px; border-bottom:2px solid var(--line); display:flex; align-items:center; gap:12px; padding:0 22px;
+    font-family:'JetBrains Mono',monospace; font-weight:500; font-size:22px; color:#7FB3D5; }
+  .win .bar i { width:14px; height:14px; border-radius:7px; background:var(--line); display:inline-block; }
+  .chip { background:var(--lime); color:var(--dark); border-radius:16px; font-family:'JetBrains Mono',monospace;
+    font-weight:700; font-size:30px; display:flex; align-items:center; justify-content:center; }
+  .stamp { width:240px; height:240px; border-radius:50%; background:var(--pink); color:var(--on); border:6px solid var(--on);
+    display:flex; align-items:center; justify-content:center; text-align:center; font-size:30px; line-height:1.05; padding:18px; }
+  .code { font-family:'JetBrains Mono',monospace; font-size:34px; line-height:1.6; white-space:pre; }
+  .k { color:var(--lime); } .g { color:#7FB3D5; }
+  /* cartão que destrava: .agua enche da esquerda para a direita (data-grow) */
+  .slot { position:absolute; left:90px; width:900px; height:150px; border-radius:24px; background:#01243F; border:2px solid var(--line); overflow:hidden; }
+  .slot .agua { position:absolute; left:0; top:0; bottom:0; width:0; background:var(--pink); }
+  .slot .rot { position:absolute; left:120px; top:0; bottom:0; display:flex; align-items:center; font-size:46px; letter-spacing:-.02em; }
+  .slot .num { position:absolute; left:34px; top:0; bottom:0; display:flex; align-items:center; font-family:'JetBrains Mono',monospace; font-size:34px; color:#7FB3D5; }
+  .slot .ico { position:absolute; right:34px; top:0; bottom:0; display:flex; align-items:center; font-size:46px; }
+  .digit { font-size:300px; line-height:1; letter-spacing:-.04em; }
+  /* HUD */
+  #pill { left:60px; top:1420px; background:var(--on); color:var(--dark); font-family:'JetBrains Mono',monospace;
+    font-weight:700; font-size:26px; padding:10px 20px; border-radius:40px; opacity:0; white-space:nowrap; }
+  #bar { left:60px; right:60px; top:1510px; height:34px; border-radius:17px; background:#013A63; border:2px solid var(--line); overflow:hidden; }
+  #fill { height:100%; width:0; border-radius:17px; background:var(--lime); }
+  #foot { left:60px; right:60px; top:1580px; display:flex; justify-content:space-between; align-items:center; }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="40" data-width="1080" data-height="1920" data-steps="3">
+  <div id="waves">
+    <svg id="wv1" height="220" style="top:40px; opacity:.35;"><path d="M0 60 Q135 0 270 60 T540 60 T810 60 T1080 60 T1350 60 T1620 60 T1890 60 T2160 60 V220 H0Z" fill="#2B99D1"/></svg>
+    <svg id="wv2" height="220" style="top:90px; opacity:.5;"><path d="M0 60 Q180 10 360 60 T720 60 T1080 60 T1440 60 T1800 60 T2160 60 V220 H0Z" fill="#2782B7"/></svg>
+    <svg id="wv3" height="220" style="top:140px;"><path d="M0 50 Q135 10 270 50 T540 50 T810 50 T1080 50 T1350 50 T1620 50 T1890 50 T2160 50 V220 H0Z" fill="#174573"/></svg>
+  </div>
+
+<!--CENAS-->
+
+  <!-- HUD -->
+  <div id="pill" class="abs"></div>
+  <div id="bar" class="abs"><div id="fill"></div></div>
+  <div id="foot" class="abs">
+    <div style="display:flex; align-items:center; gap:16px;"><img src="media/logo.png" style="width:72px; height:72px; border-radius:50%;"><span style="font-size:32px;">@bascowave</span></div>
+    <div class="mono" style="font-size:22px; color:#7FB3D5;">fonte: docs oficiais</div>
+    <div id="tema" style="font-size:32px; color:var(--lime);">TEMA</div>
+  </div>
+  <svg id="sweep" viewBox="0 0 1500 1920" preserveAspectRatio="none"><path d="M260 0 Q120 240 260 480 T260 960 T260 1440 T260 1920 H1500 V0Z" fill="#34B5DF"/><path d="M0 0 Q-140 240 0 480 T0 960 T0 1440 T0 1920 H260 Q120 1680 260 1440 T260 960 T260 480 T260 0Z" fill="#2B99D1"/></svg>
+</div>
+<script>
+  const S = STUDIO, root = S.root;
+  const STEPS = +root.dataset.steps || 3;
+  // cenas
+  const scenes = [...document.querySelectorAll('.scene')].map(el => {
+    const s = +el.dataset.s, e = +el.dataset.e;
+    const cap = document.createElement('div'); cap.className = 'cap';
+    const toks = el.dataset.cap.split(' ');
+    const n = toks.length, v = +el.dataset.v || 0;
+    const wt = (el.dataset.wt || '').split(',').filter(Boolean).map(Number);
+    const step = v ? v / n : Math.min(0.34, (e - s - 1.4) / n);
+    const words = toks.map((tk, i) => {
+      let kind = '', txt = tk;
+      if (/^\*.*\*[?!.,]?$/.test(tk)) { kind = 'lime'; txt = tk.replace(/\*/g, ''); }
+      if (/^!.*![?!.,]?$/.test(tk)) { kind = 'pink'; txt = tk.replace(/!/g, ''); }
+      const w = document.createElement('div'); w.className = 'w ' + kind;
+      w.innerHTML = '<div class="bx"></div><span></span>'; w.querySelector('span').textContent = txt;
+      cap.appendChild(w);
+      return { w, kind, at: wt.length === n ? s + 0.25 + wt[i] : s + 0.25 + i * step };
+    });
+    words.forEach((o, i) => { o.end = i < n - 1 ? words[i + 1].at : e - 0.2; });
+    el.insertBefore(cap, el.firstChild);
+    const pops = [...el.querySelectorAll('.pop')].map(p => ({ p, at: s + +p.dataset.at,
+      out: p.dataset.out ? s + +p.dataset.out : null, r: p.style.getPropertyValue('--r') || '0deg' }));
+    const titles = [...el.querySelectorAll('.title')].map(x => ({ x, at: s + +(x.dataset.at || 0) }));
+    const types = [...el.querySelectorAll('[data-type]')].map(x => {
+      const html = x.innerHTML; x.innerHTML = '';
+      return { x, html, at: s + +x.dataset.type, rate: +x.dataset.rate };
+    });
+    const grows = [...el.querySelectorAll('[data-grow]')].map(x => ({ x, at: s + +x.dataset.grow, to: +x.dataset.to,
+      w: +(x.dataset.w || 812), to2: x.dataset.to2 ? +x.dataset.to2 : null, at2: s + +(x.dataset.at2 || 0) }));
+    const fades = [...el.querySelectorAll('[data-fade]')].map(x => ({ x, at: s + +x.dataset.fade }));
+    const swaps = [...el.querySelectorAll('[data-swap]')].map(x => ({ x, at: s + +x.dataset.swap, a: x.dataset.a, b: x.dataset.b }));
+    return { el, s, e, words, pops, titles, types, grows, fades, swaps,
+      step: el.dataset.step ? +el.dataset.step : null, pill: el.dataset.pill || '', done: 'done' in el.dataset };
+  });
+  function typed(html, nChars) {
+    let out = '', c = 0, inTag = false;
+    for (const ch of html) {
+      if (ch === '<') inTag = true;
+      if (inTag) { out += ch; if (ch === '>') inTag = false; continue; }
+      if (c >= nChars) break; out += ch; c++;
+    }
+    return out;
+  }
+  const pill = document.getElementById('pill'), fill = document.getElementById('fill'), sweep = document.getElementById('sweep');
+  const doneAt = (scenes.find(x => x.done) || { s: 1e9 }).s;
+
+  S.play(function render(t) {
+    [['wv1', 40], ['wv2', -28], ['wv3', 60]].forEach(([id, v]) => { document.getElementById(id).style.transform = `translateX(${-(((t * v) % 1080) + 1080) % 1080}px)`; });
+    // onda varrendo a tela em cada troca de cena (cobre a troca em ~0,25 s)
+    let sx = 1200;
+    scenes.forEach(sc => { if (sc.s > 0) { const p = (t - (sc.s - 0.3)) / 0.6; if (p > 0 && p < 1) sx = 1100 - S.ease('power2.inOut')(p) * 2700; } });
+    sweep.style.transform = `translateX(${sx}px)`;
+    let curStep = 0, curPill = '', pillAt = 0;
+    scenes.forEach(sc => {
+      const vis = (t >= sc.s && t < sc.e) ? 1 : 0;
+      sc.el.style.opacity = vis;
+      if (sc.step && t >= sc.s) { curStep = sc.step; curPill = sc.pill; pillAt = sc.s; }
+      if (!vis) return;
+      const k = Math.min(1, Math.max(0, (t - sc.s) / (sc.e - sc.s)));
+      sc.el.querySelector('.ill').style.transform = `translateY(${-24 * k + 6 * Math.sin(t * 2.2)}px) scale(${1.04 + 0.06 * k})`;
+      sc.words.forEach(o => {
+        const on = t >= o.at && t < o.end;
+        const p = S.seg(t, o.at, 0.22, 'back.out(2.2)');
+        o.w.style.opacity = on ? 1 : 0;
+        o.w.style.transform = `translateY(${(1 - p) * 26}px) scale(${0.9 + 0.1 * p})`;
+      });
+      sc.titles.forEach(o => {
+        const p = S.seg(t, o.at, 0.45, 'back.out(1.6)');
+        o.x.style.opacity = Math.min(1, Math.max(0, (t - o.at) / 0.12));
+        o.x.style.transform = `scale(${0.85 + 0.15 * p})`;
+      });
+      sc.pops.forEach(o => {
+        const p = S.seg(t, o.at, 0.45, 'back.out(1.7)');
+        let a = Math.min(1, Math.max(0, (t - o.at) / 0.15));
+        if (o.out !== null) a *= 1 - S.seg(t, o.out, 0.15, 'power2.in');
+        o.p.style.opacity = a;
+        o.p.style.transform = `translateY(${(1 - p) * 30}px) scale(${0.8 + 0.2 * p}) rotate(${o.r})`;
+      });
+      sc.types.forEach(o => { o.x.innerHTML = typed(o.html, Math.max(0, Math.floor((t - o.at) * o.rate))); });
+      sc.grows.forEach(o => {
+        let v = o.to * S.seg(t, o.at, 0.7, 'power3.out');
+        if (o.to2 !== null) v += (o.to2 - o.to) * S.seg(t, o.at2, 0.6, 'back.out(1.4)');
+        o.x.style.width = (o.w * v) + 'px';
+      });
+      sc.fades.forEach(o => { o.x.style.opacity = S.seg(t, o.at, 0.3); });
+      sc.swaps.forEach(o => { o.x.textContent = t >= o.at ? o.b : o.a; });
+    });
+    // HUD: pílula "DESBLOQUEADO n/3" e barra
+    const pp = S.seg(t, pillAt, 0.35, 'back.out(2)');
+    pill.textContent = curPill; pill.style.opacity = curPill ? pp : 0;
+    pill.style.transform = `scale(${0.8 + 0.2 * pp})`;
+    const fp = curStep ? (curStep - 1 + S.seg(t, pillAt, 0.7, 'power3.out')) / STEPS : 0;
+    fill.style.width = (100 * (t >= doneAt ? 1 : fp)) + '%';
+    fill.style.background = t >= doneAt ? 'var(--on)' : 'var(--lime)';
+  }, { loop: false });
+  if (location.search.includes('play')) {
+    document.documentElement.style.cssText += 'zoom:' + Math.min(innerWidth / 1080, innerHeight / 1920);
+    window.__timelines.main.repeat(-1).play();
+  }
+</script>
+</body>
+</html>

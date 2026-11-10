@@ -1,0 +1,32 @@
+# dependências
+node_modules
+dist
+.DS_Store
+ferramentas/.sound-effects/
+
+# segredos (chave do ElevenLabs gravada pelo `elevenlabs onboard`)
+.env
+.env.local
+.env.*
+
+# vídeos e áudios (pesados; ficam só no computador)
+*.mp4
+*.mov
+*.mp3
+*.wav
+!.claude/skills/reel-bascowave/assets/guia-tempo.wav
+Vídeos prontos/
+Vídeo bruto/
+# referências são vídeos de outros criadores: não sobem
+Referências/
+
+# arquivos gerados em cada Reel
+reels/*/out/
+reels/*/som/kit/
+reels/*/som/out/
+reels/*/proj/frames/
+reels/*/voz-el/
+out/
+
+# projetos antigos
+arquivo/
