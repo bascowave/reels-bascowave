@@ -69,8 +69,8 @@ Pergunte qual formato (ou escolha o que não foi usado no último Reel e diga po
 
 ## Sons do Reel (kit próprio a cada vídeo)
 `montar.sh` chama `scripts/kit_som.py`, que monta `som/kit/` antes dos efeitos:
-- **Pop nas palavras que acendem: o original do kit da sound-effects** (aprovado; a gota d'água do Earshot ali foi reprovada).
-- **Assinatura @bascowave, sempre (Earshot, gerado em código, local, grátis):** whoosh = `swipe/glide` (onda) nas trocas de cena, impacto = `cut_hit/air` nos selos. Por serem gerados por nós, entram como CC0 no `CREDITS.txt`.
+- **Pop nas palavras e whoosh nas trocas de cena: os originais do kit da sound-effects** (aprovados; a gota d'água e o swipe do Earshot foram reprovados).
+- **Assinatura @bascowave, sempre (Earshot, gerado em código, local, grátis):** impacto = `cut_hit/air` nos selos. Por serem gerados por nós, entram como CC0 no `CREDITS.txt`.
 - **Variação por Reel (Openverse, só CC0):** `OPENVERSE=impact bash montar.sh …` (ou `whoosh,impact`) troca a categoria por um som CC0 novo, escolhido pelo nome da pasta, para os Reels não soarem iguais. Antes de publicar, abrir a página de cada som do Openverse listada no `som/out/CREDITS.txt` e confirmar que ainda diz CC0.
 - Digitação continua do Mixkit (baixado na hora, licença gratuita do Mixkit).
 - Instalação: `uv tool install "earshot[mcp] @ git+https://github.com/Leonxlnx/earshot"`. Os comandos `earshot sfx`/`kit` não usam os modelos de 1,1 GB; só baixe (`earshot doctor --fetch`) se o usuário quiser `describe`/`critique`.

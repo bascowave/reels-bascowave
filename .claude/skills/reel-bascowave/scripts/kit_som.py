@@ -3,7 +3,7 @@
 #
 #   Assinatura @bascowave (Earshot, gerado em código, local, sem custo):
 #     pop    -> fica o pop do kit da sound-effects (a gota d'água do Earshot foi reprovada)
-#     whoosh -> swipe/glide (troca de cena, com a onda varrendo)
+#     whoosh -> fica o whoosh do kit da sound-effects (o swipe/glide do Earshot foi reprovado)
 #     impact -> cut_hit/air (selos)
 #   Variação (Openverse, só CC0): --openverse <categoria>[,<categoria>] troca aquela categoria
 #   por um som CC0 novo, diferente a cada Reel (semente = nome da pasta).
@@ -23,7 +23,7 @@ for k in ('bundled', 'default_kit'):
         if e.get('file') and not os.path.isabs(e['file']): e['file'] = os.path.join(BASE, e['file'])
 
 ASSINATURA = {
-    'whoosh': ('swipe/glide', ['--dur', '0.6', '--apex', '0.25'], 'onda passando'),
+    # whoosh: fica o do kit da sound-effects (o swipe/glide do Earshot na troca de cena foi reprovado em 2026-11-10)
     'impact': ('cut_hit/air', [], 'batida de ar'),
 }
 BUSCA = {'whoosh': 'whoosh', 'impact': 'soft impact', 'pop': 'water drop', 'click': 'ui click', 'riser': 'riser'}
