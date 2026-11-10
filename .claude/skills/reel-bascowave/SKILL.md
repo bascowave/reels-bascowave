@@ -51,6 +51,25 @@ Pergunte qual formato (ou escolha o que não foi usado no último Reel e diga po
 2. **Roteiro em 11 cenas** e mostrar ao usuário antes de montar:
    gancho (dor) → "são 7 pontos" → 01…07 (um fato cada, rótulo curto na pílula) → pergunta-ponte → fechamento + cartão-resumo + selo "SALVA ESSE".
    Para cada cena: a frase da tela (≤ 8 palavras, 1–2 destaques) e a ilustração de interface.
+   **Ilustrações vêm do banco de estilos** (ver seção abaixo): para cada cena, sugerir um estilo do banco que combine e dizer qual no roteiro (ex.: "cena 04 · estilo Receipt").
+
+## Banco de estilos (`Referências/banco-de-estilos/`)
+84 efeitos tirados de Reels de outros criadores, cada um com descrição e prompt. O usuário navega em
+`banco-de-estilos.html` (servidor local `banco-estilos` → `http://localhost:8792/banco-de-estilos.html`); eu consulto
+`estilos.json` (mesmo conteúdo, sem imagens).
+- **Na hora do roteiro:** ler `estilos.json` e escolher para cada cena um estilo `tipo: "motion"` que sirva ao conteúdo
+  (número grande → Money stack/Bank note/Chart grow; custos → Receipt; "o que está escondido" → Iceberg; comandos →
+  Prompt bar/Keycaps/Terminal bloom; lista → Checklist/Chip row; antes/depois → Grease pencil sheet…). Não repetir o
+  mesmo estilo duas vezes seguidas e variar entre Reels.
+- **Pedido direto:** "faz no estilo X" → achar X no `estilos.json` (por `nome` ou `cmd`), mostrar ao usuário a
+  descrição e o link do original, e construir a cena no nosso motor seguindo a `desc`.
+- Estilos `tipo: "gravado"` precisam de vídeo de alguém falando: só usar se houver arquivo em `Vídeo bruto/`; senão,
+  avisar e propor um `motion` parecido.
+- O estilo é só a **mecânica visual**: sempre na identidade @bascowave (cores, fonte, logo), nunca as cores, textos ou
+  marca do criador original. 72 dos 84 prompts são reconstruídos por mim; o efeito real pode ser diferente.
+- Cena nova que deu certo → anotar no storyboard qual estilo foi usado, para o usuário reconhecer.
+- **Estilo novo para o banco:** baixar o Reel com a watch em `Referências/banco-de-estilos/videos/`, acrescentar a linha
+  em `ESTILOS` no `gerar_banco.py` e rodar `python -X utf8 gerar_banco.py` (refaz o HTML e o `estilos.json`).
 3. **Escrever as cenas.** `cp -r $K/modelo reels/<nome>/proj` (ou `modelo-ferramentas`, ver Formatos) e trocar os blocos `<div class="scene">` entre `rainbox` e `<!-- HUD -->`. O modelo traz o Reel de Hooks como exemplo de cada peça.
    - `data-cap`: frase em MAIÚSCULAS; `*PALAVRA*` = destaque azul com sublinhado em onda; `!PALAVRA!` = impacto (pílula azul). Pontuação vai fora do marcador: `*ESCOLHE*.` ou `*DIA*?`.
    - `data-step="1..7"` + `data-pill="RÓTULO"` nas cenas 01–07 (contador e barra).

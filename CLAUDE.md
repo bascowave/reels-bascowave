@@ -18,6 +18,7 @@ ElevenLabs (voz Paulo, stability 0.7), efeitos, render e conferência. Ela tem t
 | Vídeo final | `Vídeos prontos/AAAA-MM-DD_<tema>_bascowave.mp4` |
 | Logo e identidade | `marca/` |
 | Reels de referência | `Referências/<nome>/` |
+| Banco de estilos (efeitos com prompt) | `Referências/banco-de-estilos/` (`banco-de-estilos.html`, `estilos.json`) |
 | Sons CC0 e ambiente Python dos efeitos | `ferramentas/` (não apagar) |
 | Vídeo gravado pelo usuário | `Vídeo bruto/` |
 | Projetos antigos | `arquivo/` |

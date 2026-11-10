@@ -1,6 +1,31 @@
 {
   "version": "0.0.1",
   "configurations": [
-    { "name": "reel-preview", "runtimeExecutable": "python", "runtimeArgs": ["-m", "http.server", "8791", "--directory", "reels"], "port": 8791, "autoPort": false }
+    {
+      "name": "reel-preview",
+      "runtimeExecutable": "python",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8791",
+        "--directory",
+        "reels"
+      ],
+      "port": 8791,
+      "autoPort": false
+    },
+    {
+      "name": "banco-estilos",
+      "runtimeExecutable": "python",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8792",
+        "--directory",
+        "Referências/banco-de-estilos"
+      ],
+      "port": 8792,
+      "autoPort": false
+    }
   ]
 }
