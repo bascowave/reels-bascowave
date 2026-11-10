@@ -3,7 +3,7 @@
 import re, json, sys, os
 h = open(sys.argv[1], encoding='utf-8').read()
 cues = []
-cenas = re.finditer(r'<div class="scene" data-s="([\d.]+)" data-e="([\d.]+)"([^>]*?)data-cap="([^"]+)">(.*?)(?=<div class="scene"|<!-- HUD)', h, re.S)
+cenas = re.finditer(r'<div class="scene" data-s="([\d.]+)" data-e="([\d.]+)"([^>]*?)data-cap="([^"]+)">(.*?)(?=<div class="scene"|<!-- HUD|<div id="foot")', h, re.S)
 for m in cenas:
     s, e, attrs, cap, body = float(m[1]), float(m[2]), m[3], m[4], m[5]
     if s > 0: cues.append({"t": round(s, 3), "type": "scene_cut", "desc": "troca de cena"})
@@ -29,8 +29,8 @@ for m in cenas:
         cues.append({"t": round(s + float(at), 3), "type": tipo, "desc": "efeito marcado"})
 cues.sort(key=lambda c: c["t"])
 out = []
-for c in cues:  # dois sons a menos de 0,12 s um do outro: fica o primeiro
-    if out and c["t"] - out[-1]["t"] < 0.12: continue
+for c in cues:  # dois sons do MESMO tipo a menos de 0,25 s: fica o primeiro (tipos diferentes podem soar juntos)
+    if any(o["type"] == c["type"] and c["t"] - o["t"] < 0.25 for o in out[-4:]): continue
     out.append(c)
 json.dump(out, open(sys.argv[2], 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 print(len(out), "efeitos")
