@@ -3,9 +3,13 @@
 **Quando usar:** antes de qualquer narração de Reel, ou quando o usuário perguntar "qual voz/modelo usar?",
 "quanto custa?", "dá para narrar de graça?". Use junto com a skill reel-bascowave (passo 6) e com TTS.md.
 
-## Princípio: o agente escolhe, o usuário só dá a chave
+## Princípio: ElevenLabs + Paulo é o padrão; o resto só com o "sim" do usuário
 
-O usuário NÃO precisa definir GEMINI_MODEL, GEMINI_VOICE, GEMINI_STYLE, FISH_MODEL ou FISH_VOICE no .env.
+**Padrão da casa:** ElevenLabs `eleven_v4`, voz **Paulo** (`Qrdut83w0Cr152Yb4Xn3`), `STABILITY=0.7`.
+Fish Audio e Gemini são **alternativas**: o agente pode sugerir (com motivo, custo, limites e riscos), mas
+só usa depois que o usuário aprovar a troca. Nunca troque de provedor ou de voz por conta própria.
+
+Quando uma alternativa for aprovada, o usuário NÃO precisa definir GEMINI_MODEL, GEMINI_VOICE, GEMINI_STYLE, FISH_MODEL ou FISH_VOICE no .env.
 O agente lê o catálogo (npm run tts:info), entende o pedido e escolhe provedor + modelo + voz + style,
 passando por flags. As variáveis no .env são apenas overrides opcionais para quem quiser fixar algo.
 
@@ -15,8 +19,8 @@ O que fica no .env.local (única responsabilidade do usuário):
 - GEMINI_API_KEY (ou GOOGLE_API_KEY) — Gemini
 - STABILITY — opcional, só ElevenLabs (0.7 aprovado)
 
-Nunca peça ao usuário para escolher modelo ou voz: proponha você mesmo, com o motivo, e só depois de
-mostrar custo/limites peça o "sim" quando houver gasto (ElevenLabs é pago).
+Não peça ao usuário para configurar modelo ou voz no .env: proponha você mesmo, com o motivo. Mas a decisão
+de sair do padrão (ElevenLabs + Paulo) é sempre do usuário, e todo gasto de crédito precisa do "sim".
 
 ## Passo a passo
 
@@ -39,7 +43,8 @@ mostrar custo/limites peça o "sim" quando houver gasto (ElevenLabs é pago).
    ~~~
    Sem chave, --vozes mostra as 30 vozes prebuilt conhecidas do Gemini.
 
-3. **Decida com a matriz** (abaixo) e diga ao usuário o que escolheu e por quê.
+3. **Comece pelo padrão** (ElevenLabs + Paulo). Só sugira outra linha da matriz (abaixo) quando houver um
+   motivo concreto (sem crédito, outro idioma, multi-speaker) e **espere o usuário aprovar a troca**.
 
 4. **Simule o custo** antes de narrar:
    ~~~
@@ -76,8 +81,8 @@ mostrar custo/limites peça o "sim" quando houver gasto (ElevenLabs é pago).
 
 | Situação | Escolha | Por quê |
 |---|---|---|
-| Reel padrão @bascowave, pt-BR, precisa de palavras sincronizadas, sem gastar | **Fish s2.1-pro-free** | Grátis até 30/11/2026, timestamps por segmento, 83 idiomas |
-| Sincronia por palavra + voz Paulo (pt-BR) + estabilidade máxima, e há crédito aprovado | **ElevenLabs eleven_v4, voz Paulo** | Timestamps por palavra, sotaque BR aprovado |
+| **Reel padrão @bascowave** (pt-BR, palavras sincronizadas) | **ElevenLabs eleven_v4, voz Paulo, stability 0.7** | Voz aprovada pela marca, timestamps por palavra. Pago: aprovar caracteres |
+| Sem crédito no ElevenLabs e o usuário aprovou usar grátis | **Fish s2.1-pro-free** (só com aprovação) | Grátis até 30/11/2026, timestamps por segmento. Sem SLA e o áudio pode ser usado para treino |
 | Muitos idiomas (mais de 83), dramatização, multi-speaker, aceita timestamps aproximados | **Gemini 3.8 Flash TTS** | 130+ idiomas, style + tags, 30 vozes, multi-speaker |
 | Produção com SLA/garantia, sem retenção de dados, orçamento disponível | **Fish s2.1-pro pago** | Mesmo modelo, com SLA e sem retenção |
 | Volume alto e barato | **Gemini 3.8 Flash-Lite TTS** | Rápido e mais barato no Cloud |
@@ -155,8 +160,8 @@ Atalhos por cenário (pt-BR):
 Lembre ao usuário:
 - Gemini prebuilt (Kore, Puck...) são en-US: podem sair com sotaque; para pt-BR nativo use pt-br-*.
 - Fish: vozes de terceiros; confirmar direitos antes de usar em marca.
-- ElevenLabs: a conta atual não tem voz pt-BR; a voz Paulo (Qrdut83w0Cr152Yb4Xn3) não existe nesta
-  conta (voice_not_found). Para usar, adicione a voz no painel; o ID muda ao adicionar.
+- ElevenLabs: se a chamada com Paulo der `voice_not_found`, a voz não está na conta daquela chave.
+  Avise o usuário (adicionar a voz no painel muda o ID); não troque de voz sem aprovação.
 - Depois da escolha, registre em reels/<nome>/voz-escolha.json.
 
 ## Sem timestamps? Alinhe o áudio com Groq Whisper
@@ -187,7 +192,8 @@ ou ElevenLabs — nunca mude de provedor sem dizer.
 
 ## Não faça
 
-- Não peça ao usuário para definir modelo/voz no .env.local — escolha você e explique.
+- Não peça ao usuário para definir modelo/voz no .env.local — proponha você e explique.
+- Não saia do padrão (ElevenLabs + Paulo) nem troque de voz sem o "sim" do usuário.
 - Não invente modelo, preço ou limite: consulte tts-modelos.mjs/TTS.md e as fontes oficiais.
 - Não narre com ElevenLabs sem aprovação de caracteres.
 - Não use Gemini quando o Reel depende de palavra sincronizada sem avisar que o tempo será aproximado.

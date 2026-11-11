@@ -36,7 +36,7 @@ A folha de estilo antiga (fundo claro, apresentador em cartão, jump cut) está 
 perguntar antes se ela ainda vale.
 
 ## Provedores de narração (TTS)
-Ver `TTS.md` e a skill **tts-escolha** (`.claude/skills/tts-escolha/SKILL.md`): o **agente escolhe** provedor/modelo/voz/style automaticamente e avisa o usuário; o usuário só fornece as chaves no `.env.local` (não define modelo/voz).
+Ver `TTS.md` e a skill **tts-escolha** (`.claude/skills/tts-escolha/SKILL.md`): o padrão continua **ElevenLabs + voz Paulo (stability 0.7)**. Fish Audio e Gemini são alternativas que o agente pode sugerir, mas só usa com o "sim" do usuário; o usuário só fornece as chaves no `.env.local`.
 Resumo: ElevenLabs (pago, timestamps por palavra) · Fish Audio S2.1 Pro (grátis até 30/11/2026, timestamps por segmento) · Gemini 3.8 Flash TTS (free tier 3 RPM/10k TPM/10 RPD, sem timestamps).
 Comandos: `npm run narrar` (ElevenLabs) · `npm run narrar:fish` · `npm run narrar:gemini`. Chaves em `.env.local` (ver `.env.local.example`).
 Timestamps independentes do TTS: `npm run transcrever -- <pasta-ou-arquivo>` usa Groq Whisper (`whisper-large-v3`) e regrava `falaN.json` com tempos por palavra (backup em `falaN.tts.json`). Use quando o provedor não der timestamps (ex.: Gemini) ou para conferir o áudio. Chave: `GROQ_API_KEY`.

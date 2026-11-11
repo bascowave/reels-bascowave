@@ -224,7 +224,7 @@ export const VOZES_ELEVENLABS_BIBLIOTECA_PT = [
 ];
 
 export const VOZES_ELEVENLABS = [
-  { id: "Qrdut83w0Cr152Yb4Xn3", nome: "Paulo", idioma: "pt-BR", disponivel: false, nota: "voz aprovada nos Reels, mas NÃO está nesta conta (voice_not_found). Adicione no painel do ElevenLabs; o ID muda ao adicionar." },
+  { id: "Qrdut83w0Cr152Yb4Xn3", nome: "Paulo", idioma: "pt-BR", genero: "masculina", descricao: "Voz brasileira aprovada da @bascowave; usar com stability 0.7.", uso: "padrão dos Reels" },
   { id: "JBFqnCBsd6RMkjVDRZzb", nome: "George", idioma: "en", genero: "masculina", descricao: "Narrador caloroso e envolvente, britânico.", uso: "narração em inglês" },
   { id: "Xb7hH8MSUJpSbSDYk0k2", nome: "Alice", idioma: "en", genero: "feminina", descricao: "Clara e envolvente, educadora.", uso: "explicativo em inglês" },
   { id: "XrExE9yKIg1WjnnlVkGX", nome: "Matilda", idioma: "en", genero: "feminina", descricao: "Conhecedora e profissional, animada.", uso: "institucional em inglês" },
@@ -266,7 +266,8 @@ export function escolherProvedor({ sincroniaPalavra = true, idiomas = 1, express
       avisos: ["sem timestamps por palavra", "free tier AI Studio 10 RPD"],
     };
   }
-  if (sincroniaPalavra && podePagar) {
+  // padrão da casa: ElevenLabs + Paulo. As outras opções só entram quando o usuário aprovar.
+  if (podePagar || sincroniaPalavra) {
     return {
       provedor: "elevenlabs",
       modelo: "eleven_v4",

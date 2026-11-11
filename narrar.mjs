@@ -2,7 +2,7 @@
 // Uso: npm run narrar -- <falas.txt> <pasta-de-saída> [voice_id] [flags]
 //   --list        mostra modelos/vozes/limites conhecidos
 //   --dry-run     mostra o custo (caracteres) sem chamar a API
-//   --voice <id>  força voice_id (default: George; Paulo = Qrdut83w0Cr152Yb4Xn3)
+//   --voice <id>  força voice_id (padrão: Paulo Qrdut83w0Cr152Yb4Xn3, voz da marca)
 // falas.txt: uma fala por linha. A chave vem de ELEVENLABS_API_KEY (.env.local).
 // ATENÇÃO: créditos são pagos — sempre informar caracteres e esperar o sim antes de narrar/regenerar.
 import { readFileSync, writeFileSync, mkdirSync } from "fs";
@@ -57,19 +57,18 @@ if (flags.vozes) {
   }
   console.log("[elevenlabs] biblioteca compartilhada pt-BR (adicione à conta antes de usar):");
   for (const v of VOZES_ELEVENLABS_BIBLIOTECA_PT) console.log("  - " + v.nome + " — " + v.descricao + " | usar em: " + v.uso);
-  console.log("[elevenlabs] Paulo (Qrdut83w0Cr152Yb4Xn3) NÃO está nesta conta (voice_not_found); adicione no painel e use o novo ID.");
   process.exit(0);
 }
 
 const [arquivo, saida, vozArg] = pos;
 if (!arquivo || !saida) {
   console.error("uso: npm run narrar -- <falas.txt> <pasta-de-saída> [voice_id] [--dry-run] [--list]");
-  console.error("  voz aprovada: Paulo (pt-BR) Qrdut83w0Cr152Yb4Xn3 | padrão: George JBFqnCBsd6RMkjVDRZzb");
+  console.error("  voz padrão: Paulo (pt-BR) Qrdut83w0Cr152Yb4Xn3 | outra voz só com aprovação do usuário");
   console.error("  ver TTS.md e a skill tts-escolha para escolher.");
   process.exit(1);
 }
 
-const voz = flags.voice || vozArg || "JBFqnCBsd6RMkjVDRZzb";
+const voz = flags.voice || vozArg || "Qrdut83w0Cr152Yb4Xn3"; // Paulo, voz da marca
 const vozInfo = VOZES_ELEVENLABS.find((v) => v.id === voz);
 const estabilidade = process.env.STABILITY ? +process.env.STABILITY : null;
 

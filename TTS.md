@@ -12,13 +12,14 @@ com os tempos por palavra/segmento usados para sincronizar o texto na tela.
 | Fish Audio S2.1 Pro | Grátis (free tier) | Sim (por segmento) | Sim — free até 30/11/2026 | 83 | Alta (SOTA, ~90 ms TTFA) |
 | Gemini 3.8 Flash TTS | Free tier AI Studio (3 RPM/10k TPM/10 RPD) ou pago | Não (aproximado) | Free tier limitado | 130+ | Alta (expressivo, multi-speaker) |
 
-## 1. ElevenLabs (padrão atual, pago)
+## 1. ElevenLabs (padrão da casa, pago)
+
+> Fish Audio e Gemini (abaixo) são alternativas: só entram quando o usuário aprovar a troca.
 
 - **Comando:** `npm run narrar -- <falas.txt> <saida> [voice_id]`
 - **Variáveis:** `ELEVENLABS_API_KEY` (obrigatória), `STABILITY` (opcional, 0–1).
 - **Modelo fixo no código:** `eleven_v4`, `languageCode: "pt"`, `outputFormat: "mp3_44100_128"`.
-- **Voz padrão no código:** George `JBFqnCBsd6RMkjVDRZzb`.
-- **Voz recomendada (skill):** Paulo (brasileira) `Qrdut83w0Cr152Yb4Xn3`, `STABILITY=0.7`.
+- **Voz padrão:** Paulo (brasileira) `Qrdut83w0Cr152Yb4Xn3`, `STABILITY=0.7`. Outra voz só com aprovação do usuário.
 - **Timestamps:** sim, via `convertWithTimestamps` (início/fim de cada caractere → agrupado em palavras).
 - **Limites/custo:** créditos pagos. Free tier da ElevenLabs ≈ 10.000 créditos/mês (~6–10 min de áudio).
 - **Vantagens:** melhor estabilidade de sotaque BR, timestamps precisos, controle de stability.
@@ -208,10 +209,9 @@ Créditos do ElevenLabs são pagos: sempre informar caracteres e esperar "sim" a
 
 Atenção: vozes do Fish são de terceiros; confira direitos/likeness antes de usar em marca.
 
-### ElevenLabs — conta atual e biblioteca pt-BR
-- Conta: 21 vozes, todas en (George, Alice, Matilda, Daniel, Lily, Sarah, Laura...). Nenhuma pt-BR.
-- **Paulo (Qrdut83w0Cr152Yb4Xn3) NÃO está nesta conta** (voice_not_found). Adicione uma voz pt-BR no painel
-  e use o novo ID; stability 0.7 continua o ajuste aprovado.
+### ElevenLabs — vozes pt-BR
+- Padrão: **Paulo** (`Qrdut83w0Cr152Yb4Xn3`), stability 0.7. Se der `voice_not_found`, a voz não está na conta
+  daquela chave: adicione no painel (o ID pode mudar) e avise o usuário antes de trocar.
 - Biblioteca compartilhada pt-BR (adicionar à conta): Antônio (grave/caloroso/calmo), Iago (natural/calmo),
   Lucas Gabriel (calmo/claro), Marcelo (calmo/amigável), Jorge (calmo/caloroso), Teresinha (professora
   energética), Audesio (casual), Gui (chill).
