@@ -122,9 +122,8 @@ cd ~/lemo-opuscar && node core/render/video.mjs "<pasta absoluta>" --fps 30 --si
 python ~/.claude/skills/claude-video/scripts/ritmo.py reels/<pasta>/out/<tema>_bascowave.mp4
 ```
 
-Os exemplos completos de cada motor estão em `reels/2026-11-10_php2shell/` (Caption News) e
-`reels/2026-11-11_openbot/` (Living Screencast): `main.js`, `timeline.json`, `sincronizar.py`, `trilha.py`,
-`efeitos.py`, `storyboard.py`.
+Os exemplos completos de cada motor ficam só no computador da produção (a pasta `reels/` não sobe para o
+GitHub): `reels/2026-11-10_php2shell/` (Caption News) e `reels/2026-11-11_openbot/` (Living Screencast).
 
 ---
 
@@ -188,7 +187,7 @@ Ele mostra o roteiro, depois o storyboard e o custo da narração. Você aprova,
 │   ├── MANUAL-OPENBOT.md          manual para equipe de agentes
 │   ├── modelo/ modelo-ferramentas/ modelo-editorial/
 │   └── scripts/                   montar.sh, sincronizar.py, storyboard.py…
-├── reels/AAAA-MM-DD_<tema>/       cada Reel (roteiro, cenas, falas, som, storyboard)
+├── reels/AAAA-MM-DD_<tema>/       cada Reel (só no computador, não sobe)
 ├── marca/                         logo @bascowave
 ├── ferramentas/                   sons CC0 + ambiente Python
 ├── Referências/                   referências e banco de estilos   (fora do git)
