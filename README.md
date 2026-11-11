@@ -255,6 +255,12 @@ Ele mostra o roteiro, depois o storyboard e o custo da narração. Você aprova,
 
 Vídeos, áudios, quadros de filmagem e chaves ficam só no computador (`.gitignore`).
 
+## Contribuir 🤝
+
+Ideias, correções e formatos novos são bem-vindos! Abra uma [Issue](https://github.com/bascowave/reels-bascowave/issues/new/choose)
+ou mande um Pull Request; leia antes o [CONTRIBUTING.md](CONTRIBUTING.md). Código sob [licença MIT](LICENSE)
+(o logo e a identidade @bascowave ficam de fora).
+
 ## Créditos
 
 - [Claude Code](https://claude.com/claude-code) · modelo **Claude Opus 5.5**, esforço Low.
