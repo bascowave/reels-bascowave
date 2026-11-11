@@ -89,6 +89,7 @@ A Lemo (`~/lemo-opuscar`, skill `lemo-opuscar`) tem vários estilos; não copiam
    - Fala = frase da tela dita de forma natural; termos técnicos em inglês ficam só na tela quando der ("arquivo de configurações" em vez de "settings.json").
    - Pronúncia: "Claude" escrito normal (o usuário aprovou). Nunca começar frase com "E" solto (sai "É"). Nada de fala de 2 palavras terminando em palavra inglesa ("Vira hook" saiu com sotaque inglês) — dar contexto: "Então transforma isso num hook." Evitar "seguem".
    - `STABILITY=0.7 npm run narrar -- reels/<nome>/voz/falas.txt reels/<nome>/voz-el Qrdut83w0Cr152Yb4Xn3` (voz Paulo, brasileira; stability 0.7 aprovado).
+- Se o provedor escolhido não der timestamps por palavra (ex.: Gemini), rode `npm run transcrever -- reels/<nome>/voz-el` (Groq Whisper) antes de montar; o `sincronizar.py` usa o `falaN.json` regravado.
 - Antes de escolher provedor/modelo/voz, carregue a skill **tts-escolha** (`.claude/skills/tts-escolha/SKILL.md`): ela decide sozinha e avisa o usuário — o usuário NÃO define modelo/voz no .env, só as chaves.
 - Alternativas gratuitas (ver CLAUDE.md "Provedores de narração"):
   - Fish Audio S2.1 Pro (free até 30/11/2026, com timestamps): `npm run narrar:fish -- reels/<nome>/voz/falas.txt reels/<nome>/voz-el`

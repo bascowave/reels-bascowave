@@ -159,6 +159,23 @@ Lembre ao usuário:
   conta (voice_not_found). Para usar, adicione a voz no painel; o ID muda ao adicionar.
 - Depois da escolha, registre em reels/<nome>/voz-escolha.json.
 
+## Sem timestamps? Alinhe o áudio com Groq Whisper
+
+O provedor de TTS não precisa entregar timestamps: transcreva o áudio com a Groq e regrave o JSON.
+
+~~~bash
+npm run transcrever:list
+npm run transcrever -- reels/<nome>/voz-el --dry-run
+npm run transcrever -- reels/<nome>/voz-el
+~~~
+
+- Modelo padrão `whisper-large-v3` (mais preciso, $0,111/h); `whisper-large-v3-turbo` ($0,04/h) para rascunho.
+- Free tier: 20 RPM, 2.000 req/dia, 8 h de áudio/dia; mínimo cobrado 10 s por requisição.
+- O script faz backup do `falaN.json` original em `falaN.tts.json` e grava os tempos por palavra.
+- `sincronizar.py` consome o resultado sem mudanças (mesmo schema).
+- Use quando: Gemini (sem timestamps por palavra), áudio gravado, ou conferência de sincronia.
+- Avise o usuário: ~$0,0003 por fala curta (mínimo 10 s) e que o backup foi criado.
+
 ## O que avisar ao usuário (template)
 
 "Vou narrar com **<provedor> · <modelo> · voz <voz>**. Isso gasta <N> caracteres (<X> bytes UTF-8).

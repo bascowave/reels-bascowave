@@ -215,3 +215,28 @@ Atenção: vozes do Fish são de terceiros; confira direitos/likeness antes de u
 - Biblioteca compartilhada pt-BR (adicionar à conta): Antônio (grave/caloroso/calmo), Iago (natural/calmo),
   Lucas Gabriel (calmo/claro), Marcelo (calmo/amigável), Jorge (calmo/caloroso), Teresinha (professora
   energética), Audesio (casual), Gui (chill).
+
+## Timestamps independentes com Groq Whisper
+
+Para não depender do provedor de TTS, transcreva o áudio com a API da Groq (OpenAI-compatible) e
+sobrescreva o `falaN.json` com tempos por palavra:
+
+~~~bash
+npm run transcrever:list                                   # modelos, preços e limites
+npm run transcrever -- reels/<nome>/voz-el --dry-run       # plano e custo, sem chamar a API
+npm run transcrever -- reels/<nome>/voz-el                 # grava falaN.json (backup falaN.tts.json)
+npm run transcrever -- audio.mp3 --model whisper-large-v3-turbo --out pasta
+~~~
+
+- Endpoint: `https://api.groq.com/openai/v1/audio/transcriptions` (compatível com OpenAI).
+- `response_format=verbose_json` + `timestamp_granularities[]=word` e `segment`.
+- Modelos: `whisper-large-v3` ($0,111/h, WER 10,3%) e `whisper-large-v3-turbo` ($0,04/h, WER 12%).
+- Limites free tier: 20 RPM, 2.000 RPD, 7.200 s de áudio/hora, 28.800 s/dia; arquivo 25 MB;
+  mínimo cobrado de 10 s por requisição.
+- Formatos: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, webm; outros (opus, pcm) são convertidos
+  automaticamente para flac 16 kHz mono.
+- O JSON gerado mantém o formato usado por `sincronizar.py`: `{ texto, palavras: [{palavra,inicio,fim}], provider: "groq", timing: "word", ... }`.
+- Sem `--sobrescrever`, o `falaN.json` original do TTS é copiado para `falaN.tts.json` antes.
+
+**Quando usar:** Gemini (não tem timestamps por palavra), áudio gravado, conferência de sincronia
+ou troca de provedor de voz sem perder o efeito "palavra acendendo".
