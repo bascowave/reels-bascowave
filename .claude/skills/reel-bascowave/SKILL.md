@@ -6,7 +6,7 @@ description: Cria um Reel explicativo 1080×1920 da @bascowave só com motion gr
 # Reel @bascowave
 
 O usuário não grava vídeo. Ele passa o assunto; eu entrego o Reel pronto. Fale em português do Brasil, simples.
-`$K` = pasta desta skill. Raiz do projeto = `D:/Editor de Vídeo com IA`. Cada Reel numa pasta nova: `reels/AAAA-MM-DD_<tema>/` (ver "Onde salvar").
+`$K` = pasta desta skill. Raiz do projeto = a pasta onde o repositório foi clonado (onde está o `CLAUDE.md`). Cada Reel numa pasta nova: `reels/AAAA-MM-DD_<tema>/` (ver "Onde salvar").
 
 ## Regras que não se negociam
 - **Créditos ElevenLabs são pagos.** Gere só a narração final aprovada. Nada de amostras, comparações de voz ou testes sem antes dizer quantos caracteres vai custar e ouvir "sim". Regerar uma fala: dizer o custo antes.
@@ -88,7 +88,7 @@ A Lemo (`~/lemo-opuscar`, skill `lemo-opuscar`) tem vários estilos; não copiam
 6. **Narração** (só depois do sim ao storyboard):
    - Fala = frase da tela dita de forma natural; termos técnicos em inglês ficam só na tela quando der ("arquivo de configurações" em vez de "settings.json").
    - Pronúncia: "Claude" escrito normal (o usuário aprovou). Nunca começar frase com "E" solto (sai "É"). Nada de fala de 2 palavras terminando em palavra inglesa ("Vira hook" saiu com sotaque inglês) — dar contexto: "Então transforma isso num hook." Evitar "seguem".
-   - `cd "D:/Editor de Vídeo com IA" && STABILITY=0.7 npm run narrar -- reels/<nome>/voz/falas.txt reels/<nome>/voz-el Qrdut83w0Cr152Yb4Xn3` (voz Paulo, brasileira; stability 0.7 aprovado).
+   - `STABILITY=0.7 npm run narrar -- reels/<nome>/voz/falas.txt reels/<nome>/voz-el Qrdut83w0Cr152Yb4Xn3` (voz Paulo, brasileira; stability 0.7 aprovado).
 7. **Montar:** `bash $K/scripts/montar.sh reels/<nome> <nome>-bascowave`. Ele sincroniza as palavras pelo tempo real da fala, renderiza, põe os efeitos, mixa (voz na frente, −16 LUFS, pico < −4 dBFS) e gera `out/quadros-2s.jpg`.
 8. **Conferir antes de entregar:** ler `out/quadros-2s.jpg` (nada cortado, legível, dentro da área segura, contador certo), ritmo PASSOU, volume na meta. Corrigir e montar de novo se falhar.
 9. **Entregar:** enviar o MP4, dizer duração, volume, checagens, caracteres gastos e as palavras de risco para ouvir. Pedir pontos de melhoria e anotar na memória.

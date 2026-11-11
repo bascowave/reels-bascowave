@@ -33,11 +33,11 @@ Escrito em 2026-11-11, a partir dos Reels já entregues (Hooks, Claude no autom�
 
 ## 1. Onde fica cada coisa
 
-**Raiz do projeto:** `D:/Editor de Vídeo com IA` (no Git Bash: `/d/Editor de Vídeo com IA`). O caminho tem espaço e
-acento: **sempre entre aspas**.
+**Raiz do projeto:** a pasta onde o repositório foi clonado. Neste manual ela é `$RAIZ`; defina uma vez no Git Bash,
+ex.: `RAIZ="$HOME/reels-bascowave"`. Se o caminho tiver espaço ou acento: **sempre entre aspas**.
 
 > Importante para o OpenBot: cada agente começa na própria pasta `~/OpenBot/Agents/<id-do-agente>`, não no projeto.
-> Por isso todo comando deste manual usa caminho absoluto ou começa com `cd "D:/Editor de Vídeo com IA"`.
+> Por isso todo comando deste manual usa caminho absoluto ou começa com `cd "$RAIZ"`.
 > Também por isso o `CLAUDE.md` e a skill do projeto **não são carregados sozinhos**: o agente precisa lê-los
 > (seção 3). Não crie nada em `~/OpenBot/Shared` além de recados entre agentes; o trabalho vai para o projeto.
 
@@ -58,8 +58,8 @@ acento: **sempre entre aspas**.
 | Sons CC0 e ambiente dos efeitos | `ferramentas/sfx/` e `ferramentas/.sound-effects/` (não apagar) |
 | Vídeo gravado pelo dono (raro) | `Vídeo bruto/` |
 | Projetos antigos | `arquivo/` |
-| Biblioteca Lemo Opuscar | `C:/Users/Usuario/lemo-opuscar` (`~/lemo-opuscar`) |
-| Skills do usuário (watch, claude-video, sound-effects, lemo-opuscar…) | `C:/Users/Usuario/.claude/skills/` |
+| Biblioteca Lemo Opuscar | `~/lemo-opuscar` |
+| Skills do usuário (watch, claude-video, sound-effects, lemo-opuscar…) | `~/.claude/skills/` |
 
 **Dentro de um Reel** (`reels/AAAA-MM-DD_<tema>/`):
 
@@ -126,11 +126,11 @@ Cole o bloco comum em **todos** e depois o bloco do papel.
 
 **Bloco comum (todos):**
 ```
-Você trabalha na fábrica de Reels da @bascowave. O projeto fica em "D:/Editor de Vídeo com IA" (caminho com
-espaço e acento: use sempre aspas). Antes de qualquer tarefa, leia nesta ordem:
-1) "D:/Editor de Vídeo com IA/CLAUDE.md"
-2) "D:/Editor de Vídeo com IA/.claude/skills/reel-bascowave/MANUAL-OPENBOT.md" (este manual, inteiro)
-3) "D:/Editor de Vídeo com IA/.claude/skills/reel-bascowave/SKILL.md"
+Você trabalha na fábrica de Reels da @bascowave. O projeto fica em "<RAIZ>" (troque <RAIZ> pelo caminho da
+pasta do projeto ao colar; use sempre aspas). Antes de qualquer tarefa, leia nesta ordem:
+1) "<RAIZ>/CLAUDE.md"
+2) "<RAIZ>/.claude/skills/reel-bascowave/MANUAL-OPENBOT.md" (este manual, inteiro)
+3) "<RAIZ>/.claude/skills/reel-bascowave/SKILL.md"
 Use o Git Bash para os comandos. Fale em português do Brasil, simples. Nunca abra nem imprima .env.local ou chaves.
 Nunca gere voz no ElevenLabs sem o Diretor confirmar que o dono aprovou o custo. Faça só a tarefa recebida; se
 encontrar um problema novo, avise o Diretor em vez de resolver por conta própria. Salve tudo dentro da pasta do
@@ -250,13 +250,13 @@ A @bascowave entra só como selo/assinatura. A interface de um produto é **rede
 ### Contar o custo
 Total de caracteres = soma das falas (com espaços e pontuação). Exemplo:
 ```
-cd "D:/Editor de Vídeo com IA/reels/<pasta>" && python -c "print(sum(len(l.strip()) for l in open('falas.txt',encoding='utf-8') if l.strip()))"
+cd "$RAIZ/reels/<pasta>" && python -c "print(sum(len(l.strip()) for l in open('falas.txt',encoding='utf-8') if l.strip()))"
 ```
 O plano é Starter (39.147 caracteres no ciclo). Diga o número ao dono na Aprovação 2.
 
 ### Narrar (só depois do "sim")
 ```
-cd "D:/Editor de Vídeo com IA" && STABILITY=0.7 npm run narrar -- reels/<pasta>/falas.txt reels/<pasta>/voz-el Qrdut83w0Cr152Yb4Xn3
+cd "$RAIZ" && STABILITY=0.7 npm run narrar -- reels/<pasta>/falas.txt reels/<pasta>/voz-el Qrdut83w0Cr152Yb4Xn3
 ```
 (No motor HyperFrames o arquivo é `reels/<pasta>/voz/falas.txt`.)
 - Voz **Paulo** `Qrdut83w0Cr152Yb4Xn3`, modelo `eleven_v4`, `pt`, estabilidade **0,7** (aprovado).
@@ -272,13 +272,13 @@ O passo a passo detalhado de cada peça (`data-cap`, `*destaque*`, `!impacto!`, 
 no `SKILL.md`, seções "Formatos" e "Processo". Resumo dos comandos:
 
 ```
-K="D:/Editor de Vídeo com IA/.claude/skills/reel-bascowave"
-R="D:/Editor de Vídeo com IA/reels/<pasta>"
+K="<RAIZ>/.claude/skills/reel-bascowave"
+R="$RAIZ/reels/<pasta>"
 mkdir -p "$R"/{voz,voz-el,som,out}
 cp -r "$K/modelo" "$R/proj"            # ou modelo-ferramentas / modelo-editorial
 # editar as cenas em "$R/proj/index.html" (tempos provisórios ~3,8 s por cena)
 # falas em "$R/voz/falas.txt"
-cd "D:/Editor de Vídeo com IA" && python -X utf8 "$K/scripts/storyboard.py" "reels/<pasta>"   # → storyboard/storyboard.html
+cd "$RAIZ" && python -X utf8 "$K/scripts/storyboard.py" "reels/<pasta>"   # → storyboard/storyboard.html
 # APROVAÇÃO 2 → narrar (seção 6) → montar:
 bash "$K/scripts/montar.sh" "reels/<pasta>" <tema>-bascowave
 ```
@@ -299,7 +299,7 @@ Pontos de atenção:
 ### 8.1 Preparar a pasta
 Comece de um Reel Lemo pronto que use o mesmo estilo (ou o mais parecido) e **reescreva** o que é do assunto:
 ```
-cd "D:/Editor de Vídeo com IA/reels"
+cd "$RAIZ/reels"
 mkdir -p <pasta>/{voz,voz-el,som,out,storyboard,fonts}
 cp 2026-11-11_openbot/{index.html,main.js,sincronizar.py,trilha.py,efeitos.py,storyboard.py} <pasta>/   # Living Screencast
 #   ou 2026-11-10_php2shell/... para Caption News
@@ -337,7 +337,7 @@ disso use tempos provisórios (≈ caracteres/14 + 0,9 s; mínimo 2,8 s).
 
 ### 8.5 Comandos
 ```
-L=~/lemo-opuscar ; P="D:/Editor de Vídeo com IA/reels/<pasta>" ; PY=~/lemo-opuscar/.venv/Scripts/python.exe
+L=~/lemo-opuscar ; P="$RAIZ/reels/<pasta>" ; PY=~/lemo-opuscar/.venv/Scripts/python.exe
 # quadros soltos (conferência e storyboard)
 cd $L && node core/render/still.mjs "$P" 5 11.2 18.5 --size 1080x1920 --out "D:/tmp/<tema>"
 # storyboard (renderiza 1 quadro por cena, lê os eventos, monta o HTML)
@@ -411,7 +411,7 @@ No motor HyperFrames, um ajuste numa cena pede `montar.sh` de novo (ele renderiz
 
 ### 9.3 Entregar
 ```
-cp "$P/out/<tema>_bascowave.mp4" "D:/Editor de Vídeo com IA/Vídeos prontos/AAAA-MM-DD_<tema>_bascowave.mp4"
+cp "$P/out/<tema>_bascowave.mp4" "$RAIZ/Vídeos prontos/AAAA-MM-DD_<tema>_bascowave.mp4"
 ffmpeg -v error -y -i "$P/out/<tema>_bascowave.mp4" -c:v libx264 -crf 24 -preset fast -c:a copy "$P/out/<tema>_bascowave-leve.mp4"
 ```
 A cópia leve (≈ 8–10 MB) é a que vai pelo chat para o celular; o arquivo cheio passa de 25 MB.
@@ -465,3 +465,4 @@ arquivo em `Vídeos prontos/` com data · cópia leve enviada · palavras de ris
 - 2026-11-11 · Filmagem precisa ter a ver com o assunto (NASA no Reel do PHP reprovada).
 - 2026-11-11 · Ajuste pontual = refazer só o trecho e emendar.
 - 2026-11-11 · Lemo entra junto com o processo da reel-bascowave, não copiando um estilo só.
+- 2026-11-11 · Postar no Instagram pela web: na etapa "Cortar" escolher 9:16 (ou Original), nunca deixar 1:1; no passo "Editar" conferir pelo quadro que o vídeo aparece inteiro; capa = quadro com título (ex.: enviar JPG do quadro em "Selecionar do computador"); conferir o Reel no perfil depois de publicar.

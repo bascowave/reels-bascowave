@@ -91,7 +91,7 @@ Se você é um agente (Claude Code, OpenBot ou outro) e vai produzir um Reel nes
 
 | | |
 |---|---|
-| Raiz | `D:/Editor de Vídeo com IA` (espaço e acento: sempre entre aspas) |
+| Raiz | a pasta onde você clonou o repositório (com espaço ou acento: sempre entre aspas) |
 | Shell | Git Bash no Windows |
 | Pasta de cada Reel | `reels/AAAA-MM-DD_<tema>/` |
 | Saída final | `Vídeos prontos/AAAA-MM-DD_<tema>_bascowave.mp4` + cópia `-leve.mp4` para celular |
@@ -114,7 +114,7 @@ Diretor (fala com o dono, pede as aprovações)
 
 ```bash
 # narração — SÓ depois do "sim" (voz Paulo, estabilidade 0.7)
-cd "D:/Editor de Vídeo com IA" && STABILITY=0.7 npm run narrar -- reels/<pasta>/falas.txt reels/<pasta>/voz-el Qrdut83w0Cr152Yb4Xn3
+STABILITY=0.7 npm run narrar -- reels/<pasta>/falas.txt reels/<pasta>/voz-el Qrdut83w0Cr152Yb4Xn3
 
 # motor HyperFrames (formatos próprios): sincroniza, renderiza, efeitos, mixa, confere e entrega
 bash .claude/skills/reel-bascowave/scripts/montar.sh reels/<pasta> <tema>-bascowave
@@ -147,8 +147,8 @@ Instale também o **Claude Code** ([claude.com/claude-code](https://claude.com/c
 **2. Baixar o projeto**
 
 ```bash
-git clone https://github.com/bascowave/reels-bascowave.git "D:/Editor de Vídeo com IA"
-cd "D:/Editor de Vídeo com IA"
+git clone https://github.com/bascowave/reels-bascowave.git
+cd reels-bascowave
 npm install
 ```
 
