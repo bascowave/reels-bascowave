@@ -53,6 +53,9 @@ Pergunte qual formato (ou escolha o que não foi usado no último Reel e diga po
    Para cada cena: a frase da tela (≤ 8 palavras, 1–2 destaques) e a ilustração de interface.
    **Ilustrações vêm do banco de estilos** (ver seção abaixo): para cada cena, sugerir um estilo do banco que combine e dizer qual no roteiro (ex.: "cena 04 · estilo Receipt").
 
+## Estilos da Lemo Opuscar (motor alternativo)
+A Lemo (`~/lemo-opuscar`, skill `lemo-opuscar`) tem vários estilos; não copiamos um só para cá. Quando o assunto pede um deles (ex.: notícia → Caption News), esta skill continua mandando no processo (fonte, roteiro, **storyboard HTML para aprovação**, narração Paulo, som, conferência, entrega em `Vídeos prontos/`) e a Lemo faz só o visual, fiel ao `STYLE.md`, com a @bascowave só como assinatura. Filmagem sempre ligada ao assunto. Exemplo pronto: `reels/2026-11-10_php2shell/` (`sincronizar.py`, `trilha.py`, `efeitos.py`, `storyboard.py`).
+
 ## Banco de estilos (`Referências/banco-de-estilos/`)
 84 efeitos tirados de Reels de outros criadores, cada um com descrição e prompt. O usuário navega em
 `banco-de-estilos.html` (servidor local `banco-estilos` → `http://localhost:8792/banco-de-estilos.html`); eu consulto
@@ -77,7 +80,7 @@ Pergunte qual formato (ou escolha o que não foi usado no último Reel e diga po
    - Rodapé: logo + `@bascowave` à esquerda, tema à direita (trocar o texto `HOOKS`).
    - Tempos provisórios: 3,8 s por cena. A narração reparte depois.
 4. **Falas.** Escrever `reels/<nome>/voz/falas.txt`, uma fala por cena, na mesma ordem (regras de pronúncia no passo 6).
-5. **Storyboard em HTML: SEMPRE, antes de narrar** (o usuário pediu; evita descobrir problema de som/texto só no vídeo final).
+5. **Storyboard em HTML: SEMPRE, antes de narrar, em qualquer motor (HyperFrames ou Lemo)**. Quadros soltos não contam: tem que ser o HTML tela por tela (o usuário pediu; evita descobrir problema de som/texto só no vídeo final).
    - `python -X utf8 $K/scripts/storyboard.py reels/<nome>` gera `reels/<nome>/storyboard/storyboard.html`: por cena, a **imagem de como fica**, o tempo, o **texto na tela**, a **fala** e os **efeitos sonoros** (qual som e em que segundo), mais o total de caracteres.
    - Abrir no painel do navegador (`preview_start` "reel-preview" → `http://localhost:8791/<nome>/storyboard/storyboard.html`) e enviar ao usuário (SendUserFile).
    - Antes de mostrar, ler o storyboard e corrigir o óbvio (som duplicado, cena sem efeito nenhum, texto cortado).

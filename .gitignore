@@ -31,3 +31,7 @@ out/
 # projetos antigos
 arquivo/
 reels/*/storyboard/
+
+# motor Lemo: quadros de filmagem e quadros soltos (pesados, regeráveis)
+reels/*/assets/fr/
+reels/*/stills/
