@@ -89,6 +89,11 @@ A Lemo (`~/lemo-opuscar`, skill `lemo-opuscar`) tem vários estilos; não copiam
    - Fala = frase da tela dita de forma natural; termos técnicos em inglês ficam só na tela quando der ("arquivo de configurações" em vez de "settings.json").
    - Pronúncia: "Claude" escrito normal (o usuário aprovou). Nunca começar frase com "E" solto (sai "É"). Nada de fala de 2 palavras terminando em palavra inglesa ("Vira hook" saiu com sotaque inglês) — dar contexto: "Então transforma isso num hook." Evitar "seguem".
    - `STABILITY=0.7 npm run narrar -- reels/<nome>/voz/falas.txt reels/<nome>/voz-el Qrdut83w0Cr152Yb4Xn3` (voz Paulo, brasileira; stability 0.7 aprovado).
+- Antes de escolher provedor/modelo/voz, carregue a skill **tts-escolha** (`.claude/skills/tts-escolha/SKILL.md`): ela decide sozinha e avisa o usuário — o usuário NÃO define modelo/voz no .env, só as chaves.
+- Alternativas gratuitas (ver CLAUDE.md "Provedores de narração"):
+  - Fish Audio S2.1 Pro (free até 30/11/2026, com timestamps): `npm run narrar:fish -- reels/<nome>/voz/falas.txt reels/<nome>/voz-el`
+  - Gemini 3.8 Flash TTS (free tier 3 RPM/10k TPM/10 RPD, SEM timestamps por palavra — tempos aproximados): `npm run narrar:gemini -- reels/<nome>/voz/falas.txt reels/<nome>/voz-el`
+  - Para sincronia precisa de palavras na tela, prefira Fish Audio ou ElevenLabs.
 7. **Montar:** `bash $K/scripts/montar.sh reels/<nome> <nome>-bascowave`. Ele sincroniza as palavras pelo tempo real da fala, renderiza, põe os efeitos, mixa (voz na frente, −16 LUFS, pico < −4 dBFS) e gera `out/quadros-2s.jpg`.
 8. **Conferir antes de entregar:** ler `out/quadros-2s.jpg` (nada cortado, legível, dentro da área segura, contador certo), ritmo PASSOU, volume na meta. Corrigir e montar de novo se falhar.
 9. **Entregar:** enviar o MP4, dizer duração, volume, checagens, caracteres gastos e as palavras de risco para ouvir. Pedir pontos de melhoria e anotar na memória.
