@@ -30,7 +30,12 @@
     "build": "remotion bundle",
     "upgrade": "remotion upgrade",
     "lint": "eslint src && tsc",
-    "narrar": "node --env-file=.env.local narrar.mjs"
+    "narrar": "node --env-file=.env.local narrar.mjs",
+    "narrar:fish": "node --env-file=.env.local narrar-fish.mjs",
+    "narrar:gemini": "node --env-file=.env.local narrar-gemini.mjs",
+    "tts:info": "node tts-modelos.mjs --list",
+    "transcrever": "node --env-file=.env.local transcrever-groq.mjs",
+    "transcrever:list": "node transcrever-groq.mjs --list"
   },
   "allowScripts": {
     "esbuild": false

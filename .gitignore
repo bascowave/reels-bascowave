@@ -8,6 +8,7 @@ ferramentas/.sound-effects/
 .env
 .env.local
 .env.*
+!.env*.example
 
 # vídeos e áudios (pesados; ficam só no computador)
 *.mp4
