@@ -127,7 +127,61 @@ GitHub): `reels/2026-11-10_php2shell/` (Caption News) e `reels/2026-11-11_openbo
 
 ---
 
-## Para humanos: montar a máquina
+## Instalação (passo a passo)
+
+> Atalho: abra o Claude Code numa pasta vazia, cole o link deste repositório e diga *"instala esse projeto
+> seguindo o README"*. Ele faz os passos abaixo e pergunta antes de instalar cada programa.
+
+**1. Programas** (Windows, no PowerShell; detalhes na tabela abaixo)
+
+```bash
+winget install OpenJS.NodeJS.LTS Python.Python.3.12 Gyan.FFmpeg astral-sh.uv yt-dlp.yt-dlp Git.Git GitHub.cli
+```
+
+Instale também o **Claude Code** ([claude.com/claude-code](https://claude.com/claude-code)) e feche/reabra o terminal.
+
+**2. Baixar o projeto**
+
+```bash
+git clone https://github.com/bascowave/reels-bascowave.git "D:/Editor de Vídeo com IA"
+cd "D:/Editor de Vídeo com IA"
+npm install
+```
+
+**3. Ambiente dos efeitos sonoros**
+
+```bash
+python -m venv ferramentas/.sound-effects
+ferramentas/.sound-effects/Scripts/pip install librosa soundfile numpy scipy matplotlib
+```
+
+**4. Skills do Claude Code** (ficam em `~/.claude/skills`; a `reel-bascowave` já vem no projeto)
+
+```bash
+git clone --depth 1 https://github.com/Felpborges/claude-video ~/.claude/skills/claude-video
+bash ~/.claude/skills/claude-video/scripts/checar.sh
+claude plugin marketplace add lemomo-ai/lemo-opuscar
+claude plugin install lemo-opuscar@lemolab
+npx skills add Barty-Bart/motion-graphics -g -a claude-code --skill sound-effects
+npx skills add bradautomates/claude-video -g -a claude-code --skill watch
+```
+
+Na primeira vez que pedir um Reel no estilo da Lemo, ela baixa a biblioteca em `~/lemo-opuscar` sozinha.
+
+**5. Chave do ElevenLabs** (cria o `.env.local`; nunca cole a chave no chat)
+
+```bash
+npx -y @elevenlabs/cli@latest onboard init
+```
+
+Opcional: chave grátis do Groq em `~/.config/watch/.env` (`GROQ_API_KEY=`) para a skill `watch`.
+
+**6. Testar:** abra a pasta no Claude Code, abra uma conversa nova e peça *"Faz um Reel sobre X"*.
+Se ele mostrar o roteiro para aprovar, está tudo certo.
+
+---
+
+## Para humanos: o que cada peça faz
 
 ### Programas
 
