@@ -261,6 +261,12 @@ Ideias, correções e formatos novos são bem-vindos! Abra uma [Issue](https://g
 ou mande um Pull Request; leia antes o [CONTRIBUTING.md](CONTRIBUTING.md). Código sob [licença MIT](LICENSE)
 (o logo e a identidade @bascowave ficam de fora).
 
+### Quem já contribuiu 💙
+
+| | Quem | O que trouxe |
+|---|---|---|
+| <img src="https://github.com/gabedsam01.png" width="48" alt="gabedsam01"> | **Gabriel Sampaio de Souza** ([@gabedsam01](https://github.com/gabedsam01)) | Narração alternativa com Fish Audio e Gemini TTS, catálogo de vozes, `--dry-run` de custo e timestamps por palavra com Groq Whisper ([#1](https://github.com/bascowave/reels-bascowave/pull/1), [#2](https://github.com/bascowave/reels-bascowave/pull/2)) |
+
 ## Créditos
 
 - [Claude Code](https://claude.com/claude-code) · modelo **Claude Opus 5.5**, esforço Low.
