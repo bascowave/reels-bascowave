@@ -16,6 +16,10 @@
   <img alt="agentes" src="https://img.shields.io/badge/agentes-OpenBot%20ready-3ecf6e?style=for-the-badge">
 </p>
 
+<p align="center">
+  🌊 <a href="https://bascowave.github.io"><b>Ver a landing page → bascowave.github.io</b></a>
+</p>
+
 ---
 
 ## A ideia
