@@ -183,6 +183,18 @@ Opcional: chave grátis do Groq em `~/.config/watch/.env` (`GROQ_API_KEY=`) para
 **6. Testar:** abra a pasta no Claude Code, abra uma conversa nova e peça *"Faz um Reel sobre X"*.
 Se ele mostrar o roteiro para aprovar, está tudo certo.
 
+### Atualizar 🔄
+
+Quando sair versão nova (veja em [Releases](https://github.com/bascowave/reels-bascowave/releases)), rode na pasta do projeto:
+
+```bash
+git pull
+npm install
+```
+
+Se você fez **fork**, clique antes em **Sync fork** na página do seu fork.
+Quer ser avisado? Clique em **Watch → Custom → Releases** no topo do repositório.
+
 ---
 
 ## Para humanos: o que cada peça faz

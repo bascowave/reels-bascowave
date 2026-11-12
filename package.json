@@ -1,9 +1,8 @@
 {
-  "name": "scratch-2026-11-09-5d925f",
+  "name": "reels-bascowave",
   "version": "1.0.0",
-  "description": "My Remotion video",
-  "repository": {},
-  "license": "UNLICENSED",
+  "description": "Fábrica de Reels em motion graphics da @bascowave",
+  "license": "MIT",
   "engines": {
     "node": "^20.19.0 || ^22.13.0 || >=24"
   },
@@ -39,5 +38,12 @@
   },
   "allowScripts": {
     "esbuild": false
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bascowave/reels-bascowave.git"
+  },
+  "overrides": {
+    "minimatch": "^11.0.1"
   }
 }
