@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <title>NeoMoney</title>
+  <rect width="512" height="512" fill="#B0502D"/>
+  <!-- Original serif N drawn as paths; no font or external asset required. -->
+  <path fill="#F6F2EA" d="M110 394v-16h12c17 0 24-8 24-27V151c0-17-7-25-24-25h-12v-16h79l164 219V151c0-17-7-25-24-25h-15v-16h88v16h-12c-17 0-24 8-24 25v243h-25L164 157v194c0 19 7 27 24 27h15v16z"/>
+</svg>

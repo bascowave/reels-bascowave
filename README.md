@@ -51,10 +51,11 @@ Tudo roda no meu computador, com o **Claude Code** (modelo **Claude Opus 5.5**, 
 | 2026-11-10 | 4 truques de memória do Claude | Editorial claro · HyperFrames |
 | 2026-11-10 | PHP2Shell: falha crítica no PHP | Caption News · Lemo Opuscar |
 | 2026-11-11 | OpenBot: sua equipe de agentes | Living Screencast · Lemo Opuscar |
+| 2026-11-12 | NeoMoney (app de finanças) | Apresentação de app · HyperFrames |
 
 ## Os visuais
 
-Cinco estilos para o perfil não ficar repetitivo — três nossos, na identidade @bascowave, e dois da biblioteca
+Seis estilos para o perfil não ficar repetitivo — quatro nossos, na identidade @bascowave, e dois da biblioteca
 [Lemo Opuscar](https://lemomo-ai.github.io/lemo-opuscar/), fiéis ao estilo, com a @bascowave só como assinatura.
 
 | Estilo | Quando usar | Cara |
@@ -62,6 +63,7 @@ Cinco estilos para o perfil não ficar repetitivo — três nossos, na identidad
 | **7 pontos** | explicar um recurso | frase no topo com palavras acendendo no tempo da fala; contador 01/07 |
 | **3 ferramentas** | três comandos ou apps | contagem 3-2-1, cartões que destravam, "DESBLOQUEADO 1/3" |
 | **Editorial claro** | dicas, tom de revista | fundo de papel, serifa itálica, marca-texto azul |
+| **Apresentação de app** | vender um app ou sistema | a tela do app recriada em código e animada: problema → virada → recursos → assinatura |
 | **Caption News** | notícia (falha, lançamento) | página oficial em close, números grandes, legenda de telejornal |
 | **Living Screencast** | mostrar um app funcionando | interface redesenhada, cursor = você, mascote de pixels = o app |
 

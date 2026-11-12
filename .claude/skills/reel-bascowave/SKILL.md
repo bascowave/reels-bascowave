@@ -33,12 +33,27 @@ O usuário não grava vídeo. Ele passa o assunto; eu entrego o Reel pronto. Fal
 | **7 pontos** | `$K/modelo/` | 11 cenas: gancho → "são 7" → 01…07 → pergunta → resumo | frase inteira no topo, palavras acendendo; contador NN/07 |
 | **3 ferramentas** | `$K/modelo-ferramentas/` | 9 cenas: gancho → contagem 3-2-1 → (destrava 01 → demo) ×3 → resumo | **uma palavra por vez** embaixo da janela; título grande só nos momentos-chave; pílula "DESBLOQUEADO n/3" |
 | **Editorial claro** | `$K/modelo-editorial/` | ~12 cenas: gancho → "4 truques" → (capítulo "truque n de 4" → explicação) ×4 → dica → resumo | fundo de papel com sombra de onda; linha em serifa itálica + palavra-chave grande com marca-texto azul; cartões brancos com faixa preta; sem legenda palavra a palavra |
+| **Apresentação de app** | `$K/modelo-app/` | ~10 cenas, 40–45 s: problema (bagunça solta) → virada (logo + "junta tudo") → 3–5 recursos (um por cena, tela do app no celular) → "tudo numa tela" → assinatura | título serifado com número fino ("01 · RECURSO") + 1 palavra em itálico na cor de destaque; legenda em pílula escura embaixo, palavra falada acendendo |
 
 No modelo **Editorial claro**:
 - Cada cena: `.kick.serif` (linha pequena, `data-at`) + `.key` com `<span>PALAVRA</span>` (`data-at` aparece, `data-hl` passa o marca-texto). Capítulo: `.cap-n` (número) + `.cap-t` com `<span class="mark">`.
 - Cartões: `.card` com `.head` (faixa preta) e `.body`; `.tag` = etiqueta azul; `data-strike` risca texto; `data-mark` marca em azul num tempo.
 - `data-cap` fica escondido: só dá o tempo da fala. Som: marque `data-sfx="appear|reveal|success"` antes do `data-at` no elemento.
 - Fundo claro esconde movimento: cada cena precisa de algo entrando no 1º segundo, senão o ritmo reprova.
+
+No formato **Apresentação de app** (vídeo de venda de um app/sistema; referência em `Referências/apresentacao-app-belitx/`):
+- **Entrada:** prints ou link do app + para quem vende + 3–5 recursos que importam. Sem prints, perguntar; nunca inventar tela ou recurso.
+- **A tela é recriada em HTML, não colada como imagem:** cada balão, etiqueta, número e botão vira elemento próprio para poder animar. O print serve só de gabarito (cores, textos, ordem).
+- **Visual é do cliente:** cores, fontes e logo do produto mandam; @bascowave só como assinatura discreta no final, se o usuário quiser.
+- **Problema (0–9 s):** fragmentos soltos flutuando (balões, cartão "no celular", planilha, papel), cada um entrando com a palavra da fala.
+- **Virada:** logo do produto num anel de luz + frase curta palavra por palavra ("junta **tudo** num lugar só").
+- **Cada recurso:** celular com a tela, câmera sempre em leve zoom/inclinação 3D; **algo sai da tela e flutua por cima** (etiqueta, card de histórico, notificação) e **a interface age sozinha** (mensagem chegando, código sendo digitado, assinatura desenhada, carimbo, número subindo).
+- **Fechamento:** várias telas em leque ("o sistema inteiro numa tela") → logo + slogan com 1 palavra em itálico + site.
+- Fundo escuro com vinheta e partículas leves; uma cor de destaque só (ex.: cobre). Duas fontes: serifada nos títulos, sem serifa na legenda.
+- **Modelo (`$K/modelo-app/`, exemplo: NeoMoney):** palco de 360×640 escalado ×3. As telas do app são funções JS em `const S={inicio,tx,mercado,…}` (HTML na largura real do celular, 390 px) e entram com `<div class="phone" data-screen="nome" data-x data-y data-pw data-ry>`. Troque as funções pelas telas do novo app.
+- Peças animadas: `data-at="s"` (segundos na cena) **ou `data-w="k"`** (aparece na k-ésima palavra da fala, `data-dw` = atraso); `data-fx` = `pop|drop|up|left|right|fade|stamp|fly|tap|scan|suck|phone|fan`; `data-float` = balanço; `data-sfx` = som (`appear|click|success|reveal|movement|build_up`; **não usar `error_or_tech`**: o ruído do kit dura 4 s e invade a cena seguinte). Legenda em pílula sai sozinha do `data-cap`; `data-nocap`/`data-nobrand` vão no `.cam`, não na `.scene` (o sincronizar reescreve a tag da cena).
+- Montagem: `python -X utf8 $K/scripts/sincronizar.py` (dentro da pasta do Reel) → `python -X utf8 $K/scripts/palavra_para_tempo.py proj/index.html` (troca `data-w` por `data-at`, para o `gerar_cues` achar os sons) → `montar.sh`. Começar a cena 1 com algo entrando antes de 0,5 s, senão o ritmo reprova.
+- Tudo o que a tela mostra precisa existir no app (conferir com o usuário); números de exemplo marcados como fictícios se não forem reais.
 
 Pergunte qual formato (ou escolha o que não foi usado no último Reel e diga por quê). No modelo **3 ferramentas**:
 - Cenas vão no lugar de `<!--CENAS-->`; tema do rodapé no texto `TEMA`; `data-steps="3"` na raiz.
