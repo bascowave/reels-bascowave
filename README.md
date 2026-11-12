@@ -17,6 +17,11 @@
 </p>
 
 <p align="center">
+  <img src="docs/demo.gif" alt="Trecho de um Reel feito pela skill" width="280"><br>
+  <sub>10 s de um Reel feito do zero pela skill (com som na <a href="https://bascowave.github.io">landing page</a>)</sub>
+</p>
+
+<p align="center">
   🌊 <a href="https://bascowave.github.io"><b>Ver a landing page → bascowave.github.io</b></a>
 </p>
 
