@@ -4,6 +4,7 @@ O usuário não grava vídeo: ele passa um assunto (ou link) e eu entrego o Reel
 Para isso use a skill **`reel-bascowave`** (`.claude/skills/reel-bascowave/SKILL.md`): roteiro, cards, narração
 ElevenLabs (voz Paulo, stability 0.7), efeitos, render e conferência. Ela tem quatro formatos para alternar:
 "7 pontos", "3 ferramentas", "Editorial claro" e "Apresentação de app" (vídeo de venda a partir da tela de um app).
+Vídeo horizontal (YouTube: abertura em motion narrada + gravação de tela do usuário) é outra skill: **`video-horizontal-bascowave`**; a reel-bascowave é só de Reels.
 Para rodar a produção por uma equipe de agentes do OpenBot: `.claude/skills/reel-bascowave/MANUAL-OPENBOT.md`.
 
 ## Regras que não se negociam

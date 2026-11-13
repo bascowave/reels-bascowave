@@ -39,3 +39,6 @@ reels/*/stills/
 
 # Reels são criação nossa: ficam só no computador
 reels/
+
+# skill pessoal (vídeo horizontal): só no computador
+.claude/skills/video-horizontal-bascowave/

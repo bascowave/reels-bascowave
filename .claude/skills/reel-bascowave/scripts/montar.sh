@@ -14,11 +14,18 @@ python -X utf8 "$K/scripts/sincronizar.py"
 bash ~/.claude/skills/claude-video/scripts/render.sh proj out/video.mp4 high >/dev/null 2>&1
 python -I -X utf8 "$K/scripts/gerar_cues.py" proj/index.html som/cues.json
 # kit de sons do Reel: assinatura Earshot (água) + OPENVERSE=whoosh,impact troca categorias por CC0 novos
+if [ "$SOM" = "sintetizado" ]; then
+  # SOM=sintetizado: efeitos gerados por código (motor do claude-motion), sem biblioteca de sons
+  python -X utf8 "$K/scripts/som_sintetizado.py" "$(ffprobe -v error -show_entries format=duration -of csv=p=0 out/video.mp4)"
+  rm -rf som/out; mkdir -p som/out
+  ffmpeg -v error -y -i out/video.mp4 -i som/sintetizado.wav -map 0:v -map 1:a -c:v copy -c:a aac -b:a 192k som/out/after.mp4
+else
 python -X utf8 "$K/scripts/kit_som.py" . ${OPENVERSE:+--openverse "$OPENVERSE"} && SFX_LIB="$R/som/kit/manifest.json"
 rm -rf som/out
 PYTHONUTF8=1 "$SFX_PY" -X utf8 ~/.claude/skills/sound-effects/scripts/sound_pass.py --video out/video.mp4 \
   --cues som/cues.json --music "$K/assets/guia-tempo.wav" --music-db -120 --music-source "sem trilha" \
   --music-license "n/a, sem música" --use-case "Instagram Reels" --manifest "$SFX_LIB" --out som/out >/dev/null 2>&1
+fi
 ffmpeg -v error -y -i som/out/after.mp4 -i voz/narracao.wav -filter_complex \
   "[1:a]highpass=f=80,acompressor=threshold=-20dB:ratio=3:attack=5:release=80[v];[0:a]volume=0.4[s];[v][s]amix=inputs=2:normalize=0,loudnorm=I=-16:TP=-6:LRA=9,alimiter=limit=0.45:level=false[a]" \
   -map 0:v -map "[a]" -c:v copy -c:a aac -b:a 192k -ar 48000 "out/$NOME.mp4"

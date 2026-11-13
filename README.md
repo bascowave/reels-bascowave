@@ -288,6 +288,7 @@ ou mande um Pull Request; leia antes o [CONTRIBUTING.md](CONTRIBUTING.md). Códi
 
 ## Créditos
 
+- Efeitos sonoros sintetizados e regras de movimento: [claude-motion](https://github.com/whaleyxbt/claude-motion) (MIT).
 - [Claude Code](https://claude.com/claude-code) · modelo **Claude Opus 5.5**, esforço Low.
 - Render: [HyperFrames](https://hyperframes.heygen.com) + GSAP · [Lemo Opuscar](https://github.com/lemomo-ai/lemo-opuscar).
 - Voz: [ElevenLabs](https://elevenlabs.io) (Paulo).

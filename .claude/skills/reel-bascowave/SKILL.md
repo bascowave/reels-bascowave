@@ -122,6 +122,15 @@ A Lemo (`~/lemo-opuscar`, skill `lemo-opuscar`) tem vários estilos; não copiam
 - Digitação continua do Mixkit (baixado na hora, licença gratuita do Mixkit).
 - Instalação: `uv tool install "earshot[mcp] @ git+https://github.com/Leonxlnx/earshot"`. Os comandos `earshot sfx`/`kit` não usam os modelos de 1,1 GB; só baixe (`earshot doctor --fetch`) se o usuário quiser `describe`/`critique`.
 
+### Som sintetizado (opção, motor do claude-motion)
+- `SOM=sintetizado bash montar.sh …` troca a biblioteca de sons por efeitos **gerados por código** (`scripts/som_sintetizado.py` + `sons-sintetizados/sfx`, MIT, de github.com/whaleyxbt/claude-motion): sem arquivo de áudio, sem licença de som para conferir.
+- Mesmos tempos do `som/cues.json`. Pops sobem numa escala (não repetem o mesmo som), whoosh único quando troca de cena e celular entram juntos, chime no `success`, impacto no `reveal`, riser no `build_up`, digitação no `typing`.
+- Usar para variar o som entre Reels; o padrão continua o kit da sound-effects. Mostrar ao usuário para ouvir antes de fixar.
+
+## Referências de movimento (para se inspirar)
+- **Regras de movimento com números** (curvas, molas, stagger, tempos de leitura, tipografia): `referencias/claude-motion-motion-design.md`; desenho de som: `referencias/claude-motion-sound-design.md`. Ler ao montar cenas novas.
+- **Transições:** evitar só esmaecer entre cenas; preferir que um elemento da cena vire o da próxima (card do saldo → gráfico, logo → anel), ideia do hyperframes-motion-reel.
+
 ## Ajustes comuns
 - Regerar uma fala só: gerar a linha num `falas-N.txt` separado, copiar `fala0.mp3/json` por cima de `voz-el/falaN.*`, ajustar o `data-cap` se o texto mudou e rodar `montar.sh` de novo.
 - Sotaque oscilando: subir `STABILITY` (0.7 → 0.8) só na fala problemática.
