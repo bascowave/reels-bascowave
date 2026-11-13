@@ -1,0 +1,45 @@
+name: checar
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  checar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Sintaxe dos scripts Node
+        run: |
+          for f in $(git ls-files '*.mjs' '*.js' | grep -v -E '^(node_modules|src)/'); do
+            node --check "$f" || exit 1
+          done
+
+      - name: Sintaxe dos scripts Python
+        run: python -m py_compile $(git ls-files '*.py')
+
+      - name: Sintaxe dos scripts Bash
+        run: |
+          for f in $(git ls-files '*.sh'); do bash -n "$f" || exit 1; done
+
+      - name: Nada de segredo, vídeo ou Reel no repositório
+        run: |
+          ruim=$(git ls-files | grep -E '(^|/)\.env($|\.local$)|\.(mp4|mov|mp3)$|^reels/|^Vídeos prontos/|^Refer' || true)
+          if [ -n "$ruim" ]; then echo "Arquivos que não deviam subir:"; echo "$ruim"; exit 1; fi
+          if git grep -n -I -E '(sk-[A-Za-z0-9]{20,}|xi-api-key["'"'"' :=]+[A-Za-z0-9]{20,}|AIza[0-9A-Za-z_-]{30,}|gsk_[A-Za-z0-9]{20,})' -- . ':!*.md'; then
+            echo "Parece uma chave de API no código. Use o .env.local."; exit 1
+          fi
+          echo "ok"

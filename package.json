@@ -34,7 +34,8 @@
     "narrar:gemini": "node --env-file=.env.local narrar-gemini.mjs",
     "tts:info": "node tts-modelos.mjs --list",
     "transcrever": "node --env-file=.env.local transcrever-groq.mjs",
-    "transcrever:list": "node transcrever-groq.mjs --list"
+    "transcrever:list": "node transcrever-groq.mjs --list",
+    "checar": "node .claude/skills/reel-bascowave/scripts/checar.mjs"
   },
   "allowScripts": {
     "esbuild": false

@@ -17,12 +17,17 @@
 </p>
 
 <p align="center">
-  <img src="docs/demo.gif" alt="Trecho de um Reel feito pela skill" width="280"><br>
-  <sub>10 s de um Reel feito do zero pela skill (com som na <a href="https://bascowave.github.io">landing page</a>)</sub>
+  <img src="docs/demo.gif" alt="Trecho de um Reel explicativo feito pela skill" width="260">
+  &nbsp;&nbsp;
+  <img src="docs/demo-app.gif" alt="Trecho de um vídeo de venda de app feito pela skill" width="260"><br>
+  <sub>Feitos do zero pela skill: explicativo (7 pontos) e venda de app (Apresentação de app) · com som na <a href="https://bascowave.github.io">landing page</a></sub>
 </p>
 
 <p align="center">
   🌊 <a href="https://bascowave.github.io"><b>Ver a landing page → bascowave.github.io</b></a>
+<br>
+  ⭐ Deixe uma estrela e clique em <b>Watch → Custom → Releases</b> para saber das novidades ·
+  💬 <a href="https://github.com/bascowave/reels-bascowave/discussions">mostre o Reel que você fez</a>
 </p>
 
 ---
@@ -140,8 +145,10 @@ GitHub): `reels/2026-11-10_php2shell/` (Caption News) e `reels/2026-11-11_openbo
 
 ## Instalação (passo a passo)
 
-> Atalho: abra o Claude Code numa pasta vazia, cole o link deste repositório e diga *"instala esse projeto
-> seguindo o README"*. Ele faz os passos abaixo e pergunta antes de instalar cada programa.
+> **Jeito mais fácil:** abra o Claude Code numa pasta vazia e cole:
+> *"Instala o https://github.com/bascowave/reels-bascowave seguindo o INSTALAR.md e roda `npm run checar` no final."*
+> Ele segue o [INSTALAR.md](INSTALAR.md), pergunta antes de instalar cada programa e confere tudo no fim.
+> Já instalou? Rode `npm run checar` para ver o que falta (✅/❌).
 
 **1. Programas** (Windows, no PowerShell; detalhes na tabela abaixo)
 
@@ -275,6 +282,9 @@ Ele mostra o roteiro, depois o storyboard e o custo da narração. Você aprova,
 Vídeos, áudios, quadros de filmagem e chaves ficam só no computador (`.gitignore`).
 
 ## Contribuir 🤝
+
+Fez um Reel com a skill? Posta em [Discussions → Show and tell](https://github.com/bascowave/reels-bascowave/discussions/categories/show-and-tell).
+Dúvida de instalação ou uso? [Discussions → Q&A](https://github.com/bascowave/reels-bascowave/discussions/categories/q-a).
 
 Ideias, correções e formatos novos são bem-vindos! Abra uma [Issue](https://github.com/bascowave/reels-bascowave/issues/new/choose)
 ou mande um Pull Request; leia antes o [CONTRIBUTING.md](CONTRIBUTING.md). Código sob [licença MIT](LICENSE)
